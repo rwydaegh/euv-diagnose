@@ -1,0 +1,120 @@
+{
+  "models": [
+    {
+      "tag": "131",
+      "channels": [
+        {
+          "channel": "Absorber",
+          "candidates": [
+            {
+              "path": "research/sources/sherwin/Reflectivityapp/TaN_131/Data/Reflectivityapp_workspace_2019_08_21_Abs.mat",
+              "sha256": "351c81c80747ece5d21e5ab4e1139ded816ab82e24c5ea438133103c3af7c0d5",
+              "embedded_cell_exact_match": true,
+              "max_amplitude_difference_from_saved_observations": 0.0,
+              "negative_raw_values_on_fit_grid": 1
+            }
+          ]
+        },
+        {
+          "channel": "Multilayer",
+          "candidates": [
+            {
+              "path": "research/sources/sherwin/Reflectivityapp/TaN_131/Data/Reflectivityapp_workspace_2019_06_22_ML.mat",
+              "sha256": "5b8c4223f94935729f6d93e0cac77cd711605eb39feb11d615620904e26bf09e",
+              "embedded_cell_exact_match": true,
+              "max_amplitude_difference_from_saved_observations": 0.0,
+              "negative_raw_values_on_fit_grid": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "073",
+      "channels": [
+        {
+          "channel": "Absorber",
+          "candidates": [
+            {
+              "path": "research/sources/sherwin/Reflectivityapp/PSM_073/Data/1/Reflectivityapp_workspace_073_Abs.mat",
+              "sha256": "3c75f4878cfb2b3524382e3a7304b9c4f41f8f826f818aa4d3112a0cd1134cbc",
+              "embedded_cell_exact_match": false,
+              "max_amplitude_difference_from_saved_observations": 0.24679231581958108,
+              "negative_raw_values_on_fit_grid": 0
+            },
+            {
+              "path": "research/sources/sherwin/Reflectivityapp/PSM_073/Data/Reflectivityapp_workspace_073_Abs.mat",
+              "sha256": "d6c84400dc980cbef7ef5d971b26a5e13a29b52aaa80c4550d4d524613de96a0",
+              "embedded_cell_exact_match": true,
+              "max_amplitude_difference_from_saved_observations": 0.0,
+              "negative_raw_values_on_fit_grid": 0
+            }
+          ]
+        },
+        {
+          "channel": "Multilayer",
+          "candidates": [
+            {
+              "path": "research/sources/sherwin/Reflectivityapp/PSM_073/Data/1/Reflectivityapp_workspace_073_ML_LL.mat",
+              "sha256": "e7a398519c52a330325482ee427a39fc66e1d581981de5c04587ca5d93fe15cd",
+              "embedded_cell_exact_match": false,
+              "max_amplitude_difference_from_saved_observations": 0.6657243357133568,
+              "negative_raw_values_on_fit_grid": 0
+            },
+            {
+              "path": "research/sources/sherwin/Reflectivityapp/PSM_073/Data/Reflectivityapp_workspace_073_ML_LL.mat",
+              "sha256": "cdf5d85c8e8bbbca9a6589af9035cedf12f9639c7979bc601b4b598675bc257e",
+              "embedded_cell_exact_match": true,
+              "max_amplitude_difference_from_saved_observations": 0.0,
+              "negative_raw_values_on_fit_grid": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "074",
+      "channels": [
+        {
+          "channel": "Absorber",
+          "candidates": [
+            {
+              "path": "research/sources/sherwin/Reflectivityapp/PSM_074/Data/1/Reflectivityapp_workspace_074_Abs.mat",
+              "sha256": "6209cc27e743bf8a989a93f52f3226a0142a47ceb61fca0ae089da26f50c7ea2",
+              "embedded_cell_exact_match": false,
+              "max_amplitude_difference_from_saved_observations": 0.2835460914374408,
+              "negative_raw_values_on_fit_grid": 0
+            },
+            {
+              "path": "research/sources/sherwin/Reflectivityapp/PSM_074/Data/Reflectivityapp_workspace_074_Abs.mat",
+              "sha256": "7cd559d4224ed3d531ba560dd0897a3e22cf465eae444eb689d6488684087614",
+              "embedded_cell_exact_match": true,
+              "max_amplitude_difference_from_saved_observations": 0.0,
+              "negative_raw_values_on_fit_grid": 0
+            }
+          ]
+        },
+        {
+          "channel": "Multilayer",
+          "candidates": [
+            {
+              "path": "research/sources/sherwin/Reflectivityapp/PSM_074/Data/1/Reflectivityapp_workspace_074_ML_LL.mat",
+              "sha256": "8ca5a6e593a1c9b8771a3a4b84bb118baeb1f5a1bde1d295550ad9f9dc39c201",
+              "embedded_cell_exact_match": false,
+              "max_amplitude_difference_from_saved_observations": 0.6892712062190351,
+              "negative_raw_values_on_fit_grid": 0
+            },
+            {
+              "path": "research/sources/sherwin/Reflectivityapp/PSM_074/Data/Reflectivityapp_workspace_074_ML_LL.mat",
+              "sha256": "2eb192062f7cfa6ac69375a2d4964c5133c61f365a02337499a7535b0f6b36ab",
+              "embedded_cell_exact_match": true,
+              "max_amplitude_difference_from_saved_observations": 0.0,
+              "negative_raw_values_on_fit_grid": 0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "repeat_exclusions": "Paper-to-file scan-index mapping remains unresolved; no repeat scan silently excluded."
+}

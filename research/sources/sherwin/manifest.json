@@ -1,0 +1,206 @@
+[
+  {
+    "path": "LICENSE",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/LICENSE",
+    "sha256": "ba2da761d1f44a98c77f31b8240d1c7d07edf3ee2f73347898af2e09a2a05f49",
+    "bytes": 1071
+  },
+  {
+    "path": "README.md",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/README.md",
+    "sha256": "7ea8bc151f084ab88630236a77c5a0bac3de633386276e5c8d5d4d890768a6ad",
+    "bytes": 1220
+  },
+  {
+    "path": "FIlm models/Reflectivityapp_workspace_fit073.mat",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/FIlm%20models/Reflectivityapp_workspace_fit073.mat",
+    "sha256": "9e22ac052f1f3c7ca315d6418fc7d4e5d850f06dc7e97f52d61beaee83905c42",
+    "bytes": 58168
+  },
+  {
+    "path": "FIlm models/Reflectivityapp_workspace_fit074.mat",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/FIlm%20models/Reflectivityapp_workspace_fit074.mat",
+    "sha256": "f1dbe0f64707ccb10a8646dff3b77462fe3c82d32676e2ca1fe34688216e194d",
+    "bytes": 59393
+  },
+  {
+    "path": "FIlm models/Reflectivityapp_workspace_fit131.mat",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/FIlm%20models/Reflectivityapp_workspace_fit131.mat",
+    "sha256": "deca438b29aa30d195b61afb5dd6e696b70b9c0f5fde9ab8bcf97bcbcc5f8bb5",
+    "bytes": 128524
+  },
+  {
+    "path": "Reflectivityapp/PSM_073/Data/1/Reflectivityapp_workspace_073_Abs.mat",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Reflectivityapp/PSM_073/Data/1/Reflectivityapp_workspace_073_Abs.mat",
+    "sha256": "3c75f4878cfb2b3524382e3a7304b9c4f41f8f826f818aa4d3112a0cd1134cbc",
+    "bytes": 4450
+  },
+  {
+    "path": "Reflectivityapp/PSM_073/Data/1/Reflectivityapp_workspace_073_ML_LL.mat",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Reflectivityapp/PSM_073/Data/1/Reflectivityapp_workspace_073_ML_LL.mat",
+    "sha256": "e7a398519c52a330325482ee427a39fc66e1d581981de5c04587ca5d93fe15cd",
+    "bytes": 4357
+  },
+  {
+    "path": "Reflectivityapp/PSM_073/Data/1/Reflectivityapp_workspace_073_ML_UL.mat",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Reflectivityapp/PSM_073/Data/1/Reflectivityapp_workspace_073_ML_UL.mat",
+    "sha256": "9aea3472e5f0003c4e58388feec1bda26b0b051bf3d12f8a86f07c56de1af1e1",
+    "bytes": 4384
+  },
+  {
+    "path": "Reflectivityapp/PSM_073/Data/Reflectivityapp_workspace_073_Abs.mat",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Reflectivityapp/PSM_073/Data/Reflectivityapp_workspace_073_Abs.mat",
+    "sha256": "d6c84400dc980cbef7ef5d971b26a5e13a29b52aaa80c4550d4d524613de96a0",
+    "bytes": 4449
+  },
+  {
+    "path": "Reflectivityapp/PSM_073/Data/Reflectivityapp_workspace_073_ML_LL.mat",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Reflectivityapp/PSM_073/Data/Reflectivityapp_workspace_073_ML_LL.mat",
+    "sha256": "cdf5d85c8e8bbbca9a6589af9035cedf12f9639c7979bc601b4b598675bc257e",
+    "bytes": 4356
+  },
+  {
+    "path": "Reflectivityapp/PSM_073/Data/Reflectivityapp_workspace_073_ML_UL.mat",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Reflectivityapp/PSM_073/Data/Reflectivityapp_workspace_073_ML_UL.mat",
+    "sha256": "7751167bcf334d72e2a81c0ffcf892a623fbc85f4ef844e16727b64e2383f7e4",
+    "bytes": 4383
+  },
+  {
+    "path": "Reflectivityapp/PSM_073/Reflectivityapp_workspace.mat",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Reflectivityapp/PSM_073/Reflectivityapp_workspace.mat",
+    "sha256": "5bbdfa3721f692f427194081382eab2aed366ad0f132de2d62edcac7eec6db21",
+    "bytes": 58406
+  },
+  {
+    "path": "Reflectivityapp/PSM_074/Data/1/Reflectivityapp_workspace_074_Abs.mat",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Reflectivityapp/PSM_074/Data/1/Reflectivityapp_workspace_074_Abs.mat",
+    "sha256": "6209cc27e743bf8a989a93f52f3226a0142a47ceb61fca0ae089da26f50c7ea2",
+    "bytes": 4464
+  },
+  {
+    "path": "Reflectivityapp/PSM_074/Data/1/Reflectivityapp_workspace_074_ML_LL.mat",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Reflectivityapp/PSM_074/Data/1/Reflectivityapp_workspace_074_ML_LL.mat",
+    "sha256": "8ca5a6e593a1c9b8771a3a4b84bb118baeb1f5a1bde1d295550ad9f9dc39c201",
+    "bytes": 4386
+  },
+  {
+    "path": "Reflectivityapp/PSM_074/Data/1/Reflectivityapp_workspace_074_ML_UL.mat",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Reflectivityapp/PSM_074/Data/1/Reflectivityapp_workspace_074_ML_UL.mat",
+    "sha256": "0ec1923a520f61ec37d2b4002968ccd466aebd1cde1f4a74a8c59ca59b4607e9",
+    "bytes": 4362
+  },
+  {
+    "path": "Reflectivityapp/PSM_074/Data/Reflectivityapp_workspace_074_Abs.mat",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Reflectivityapp/PSM_074/Data/Reflectivityapp_workspace_074_Abs.mat",
+    "sha256": "7cd559d4224ed3d531ba560dd0897a3e22cf465eae444eb689d6488684087614",
+    "bytes": 4463
+  },
+  {
+    "path": "Reflectivityapp/PSM_074/Data/Reflectivityapp_workspace_074_ML_LL.mat",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Reflectivityapp/PSM_074/Data/Reflectivityapp_workspace_074_ML_LL.mat",
+    "sha256": "2eb192062f7cfa6ac69375a2d4964c5133c61f365a02337499a7535b0f6b36ab",
+    "bytes": 4385
+  },
+  {
+    "path": "Reflectivityapp/PSM_074/Data/Reflectivityapp_workspace_074_ML_UL.mat",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Reflectivityapp/PSM_074/Data/Reflectivityapp_workspace_074_ML_UL.mat",
+    "sha256": "887f10533ea38a343ae48a0e2fc348f7695e36022876886481730465d6aa9b84",
+    "bytes": 4361
+  },
+  {
+    "path": "Reflectivityapp/PSM_074/Reflectivityapp_workspace.mat",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Reflectivityapp/PSM_074/Reflectivityapp_workspace.mat",
+    "sha256": "730e4184588d08714b403ac377d7c08b8827235a91832abac8279b83f1e8e7bc",
+    "bytes": 59621
+  },
+  {
+    "path": "Reflectivityapp/TaN_131/Data/Reflectivityapp_workspace_2019_06_22_ML.mat",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Reflectivityapp/TaN_131/Data/Reflectivityapp_workspace_2019_06_22_ML.mat",
+    "sha256": "5b8c4223f94935729f6d93e0cac77cd711605eb39feb11d615620904e26bf09e",
+    "bytes": 21781
+  },
+  {
+    "path": "Reflectivityapp/TaN_131/Data/Reflectivityapp_workspace_2019_08_21_Abs.mat",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Reflectivityapp/TaN_131/Data/Reflectivityapp_workspace_2019_08_21_Abs.mat",
+    "sha256": "351c81c80747ece5d21e5ab4e1139ded816ab82e24c5ea438133103c3af7c0d5",
+    "bytes": 22651
+  },
+  {
+    "path": "Reflectivityapp/TaN_131/Data/Reflectivityapp_workspace_2019_11_22_AbsML.mat",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Reflectivityapp/TaN_131/Data/Reflectivityapp_workspace_2019_11_22_AbsML.mat",
+    "sha256": "d33ab7c89dcdfb960de85697cd1455e432d80342b971a0e7c135d7455dd46607",
+    "bytes": 178509
+  },
+  {
+    "path": "Reflectivityapp/TaN_131/Reflectivityapp_workspace_fit131.mat",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Reflectivityapp/TaN_131/Reflectivityapp_workspace_fit131.mat",
+    "sha256": "deca438b29aa30d195b61afb5dd6e696b70b9c0f5fde9ab8bcf97bcbcc5f8bb5",
+    "bytes": 128524
+  },
+  {
+    "path": "Fresnel/calcFresnel_rough_periodic.m",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Fresnel/calcFresnel_rough_periodic.m",
+    "sha256": "a39d2d1ad68903daaf0bf9c02134379bb2baa37cbf5881d5e7e8e499ad5da0a7",
+    "bytes": 3543
+  },
+  {
+    "path": "Fresnel/calcMLAbsEtchFresnel.m",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Fresnel/calcMLAbsEtchFresnel.m",
+    "sha256": "e1712d01dfcccf62a7fdca6c19754097046d34adc05483ed90f343d87a2b90d7",
+    "bytes": 3016
+  },
+  {
+    "path": "Fresnel/calcMLAbsEtchFresnel_model.m",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Fresnel/calcMLAbsEtchFresnel_model.m",
+    "sha256": "101b706f2a82dd143d8bdddd95ed50d6b9e29d47a2ac9dba444a0a6fc1b57450",
+    "bytes": 1075
+  },
+  {
+    "path": "Fresnel/calcMLAbsEtchFresnel_wrapper.m",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Fresnel/calcMLAbsEtchFresnel_wrapper.m",
+    "sha256": "1808a59d4260b586fad3a06f369f08afedb4a1643375aeca2748f47a13523a2a",
+    "bytes": 224
+  },
+  {
+    "path": "Fresnel/getMLnk.m",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Fresnel/getMLnk.m",
+    "sha256": "dcb9038542d8a9ec2408a6b79e7d0b2cd11ff438c45ef886a2b83b26aed5b9cd",
+    "bytes": 666
+  },
+  {
+    "path": "Fresnel/mkMLAbsEtch.m",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Fresnel/mkMLAbsEtch.m",
+    "sha256": "59902d6489fed25450c97cc74a5101c05e432766566f7b03fa7a0120297700e2",
+    "bytes": 3301
+  },
+  {
+    "path": "Elemental nk/mkMLStack.m",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Elemental%20nk/mkMLStack.m",
+    "bytes": 918,
+    "sha256": "8efb8d6ff46dc76aa70899f5468ee545d720a37096f7b1f9e924cdaaed86b624"
+  },
+  {
+    "path": "Elemental nk/getScatFac.m",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Elemental%20nk/getScatFac.m",
+    "bytes": 694,
+    "sha256": "ce57863e10aee9bc4d8fee0fd27e80e664fa4e3909f7aaf92330ddb19f6781ab"
+  },
+  {
+    "path": "Utilities/vec.m",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Utilities/vec.m",
+    "bytes": 39,
+    "sha256": "f21c7fd31393671e21d1808aea83b037ec2954fafc721fe6eb3a2e4f5115f17e"
+  },
+  {
+    "path": "Elemental nk/matMul2x2.m",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Elemental%20nk/matMul2x2.m",
+    "sha256": "a3d0c4097aecf4a11ccf1212d173d0558e7bea648c47d5b612e0158e882c5cd8",
+    "bytes": 390
+  },
+  {
+    "path": "Apps/Reflectivityapp.mlapp",
+    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Apps/Reflectivityapp.mlapp",
+    "sha256": "83b73fba1ffbbf3e420c76540c821999ed7918f460b8e558fa632468ced267bc",
+    "bytes": 276047
+  }
+]
