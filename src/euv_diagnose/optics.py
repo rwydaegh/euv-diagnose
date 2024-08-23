@@ -49,3 +49,78 @@ def transfer_matrix(thickness, nk, roughness, wavelength, angle, *, periods=0, c
     if not np.isfinite(out).all():
         raise FloatingPointError('Transfer matrix overflow; requested stack not supported')
     return out
+
+@dataclass
+class ReleasedModel:
+    x: np.ndarray
+    indices: dict
+    grid: np.ndarray
+    factors: np.ndarray
+    amu: np.ndarray
+    density: np.ndarray
+    periods: int
+    caps: int
+    per: int
+    etch: int
+    polarization: str
+    observed_amplitude: np.ndarray
+    periodic_convention: str = 'legacy'
+
+    @classmethod
+    def load(cls, path: str | Path):
+        m = loadmat(path, simplify_cells=True)['model']
+        return cls(m['x'].copy(), {k: np.asarray(v, dtype=int) - 1 for (k, v) in m['ind_struct'].items()}, m['lambdaTheta'], m['f0f1_elements_r'], m['amu'], m['rho_nom'], int(m['N_ML']), int(m['n_cap']), int(m['n_per']), int(m['n_etch']), str(m['pol']), m['data'])
+
+    def amplitude(self, x=None, *, angle_shift=0.0):
+        x = self.x if x is None else np.asarray(x, dtype=float)
+        if x.shape != self.x.shape or not np.isfinite(x).all():
+            raise ValueError('Invalid parameter vector')
+        thick = x[self.indices['thick']].copy()
+        rough = x[self.indices['rough']]
+        comp = x[self.indices['composition']].reshape(len(self.amu), -1, order='F')
+        if (comp < 0).any() or (rough < 0).any():
+            raise ValueError('Negative material concentration or roughness')
+        wl = self.grid[:, 0]
+        angle = self.grid[:, 1] + angle_shift
+        const = 1e-12 * wl ** 2 * 2.8179e-15 / (2 * np.pi)
+        nk = 1 - const[:, None] * (self.factors @ ((self.density / self.amu * 6.0221409e+23)[:, None] * comp))
+        etch_index = self.caps + self.per
+        abs_indices = np.arange(self.etch + 1)
+        shared = np.arange(self.etch + 1, etch_index)
+        carbon = np.arange(etch_index + 1, len(thick))
+        mirror_thick = np.r_[0.0, thick[shared]]
+        mirror_nk = np.column_stack([np.ones(len(wl)), nk[:, shared]])
+        mirror_rough = np.r_[0.0, rough[shared], 0.0]
+        mirror = transfer_matrix(mirror_thick, mirror_nk, mirror_rough, wl, angle, periods=self.periods, caps=len(mirror_thick) - self.per, polarization=self.polarization, periodic_convention=self.periodic_convention)
+        corr = float(x[self.indices['substrate_roughness']])
+        if not 0 <= corr <= 1 / 0.2878:
+            raise ValueError('Empirical correlated roughness correction outside domain')
+        mirror[:, 1, 0] *= np.sqrt(1 - corr * 0.2878)
+        absorber = transfer_matrix(thick[abs_indices], nk[:, abs_indices], np.r_[rough[abs_indices], 0.0], wl, angle, polarization=self.polarization)
+        remain = abs_indices[self.etch - 1:]
+        et = thick[remain].copy()
+        et[0] = thick[etch_index]
+        er = rough[remain].copy()
+        er[0] = rough[etch_index]
+        et = np.r_[thick[carbon], et]
+        en = np.column_stack([nk[:, carbon], nk[:, remain]])
+        er = np.r_[rough[carbon], er, 0.0]
+        et = np.r_[sum(thick[abs_indices]) - sum(et), et]
+        en = np.column_stack([np.ones(len(wl)), en])
+        er = np.r_[0.0, er]
+        negative = np.flatnonzero(et < 0)
+        if len(negative):
+            j = negative[0]
+            if j + 1 >= len(et):
+                raise ValueError('Invalid signed etch offset')
+            et[j + 1] += et[j]
+            et[j] = 0.0
+        etched = transfer_matrix(et, en, er, wl, angle, polarization=self.polarization)
+        matrices = [absorber @ mirror, etched @ mirror]
+        result = np.column_stack([m[:, 1, 0] / m[:, 0, 0] for m in matrices])
+        if not np.isfinite(result).all():
+            raise FloatingPointError('Nonfinite reflection amplitude')
+        return result
+
+    def intensity(self, x=None, *, angle_shift=0.0):
+        return np.abs(self.amplitude(x, angle_shift=angle_shift)) ** 2
