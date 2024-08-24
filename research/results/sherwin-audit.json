@@ -1,0 +1,176 @@
+{
+  "scope": "Repository-model replay, not reproduction of paper fits or independent accuracy validation.",
+  "models": [
+    {
+      "tag": "131",
+      "measurement_pairs": 707,
+      "seconds": 0.02460002899169922,
+      "amplitude_rmse": [
+        0.0016738287689350127,
+        0.021636344764865444
+      ],
+      "amplitude_relative_l2": [
+        0.02275162172724721,
+        0.04895316767343567
+      ]
+    },
+    {
+      "tag": "073",
+      "measurement_pairs": 202,
+      "seconds": 0.00982213020324707,
+      "amplitude_rmse": [
+        0.003344011158191851,
+        0.017030133956572005
+      ],
+      "amplitude_relative_l2": [
+        0.021750994319035738,
+        0.03905158688727734
+      ]
+    },
+    {
+      "tag": "074",
+      "measurement_pairs": 202,
+      "seconds": 0.00941014289855957,
+      "amplitude_rmse": [
+        0.003127846464402508,
+        0.04340598033902078
+      ],
+      "amplitude_relative_l2": [
+        0.01928766591453355,
+        0.09904307188955012
+      ]
+    }
+  ],
+  "repeat_data": {
+    "shape": [
+      101,
+      11,
+      22
+    ],
+    "wavelength_nm": [
+      12.5,
+      14.5
+    ],
+    "angles_deg": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "scan_types": [
+      "Absorber",
+      "Absorber",
+      "Absorber",
+      "Absorber",
+      "Absorber",
+      "Absorber",
+      "Absorber",
+      "Absorber",
+      "Absorber",
+      "Absorber",
+      "Absorber",
+      "Multilayer",
+      "Multilayer",
+      "Multilayer",
+      "Multilayer",
+      "Multilayer",
+      "Multilayer",
+      "Multilayer",
+      "Multilayer",
+      "Multilayer",
+      "Multilayer",
+      "Multilayer"
+    ],
+    "negative_counts": [
+      11,
+      9,
+      7,
+      7,
+      2,
+      3,
+      6,
+      145,
+      178,
+      17,
+      3,
+      6,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "mean_reflectivity": [
+      0.0054826243376237625,
+      0.005492773441764176,
+      0.005500026821962196,
+      0.005509315543654365,
+      0.005508966833483348,
+      0.005510455753555355,
+      0.005524091908010801,
+      0.002540391507650765,
+      0.000948652225652565,
+      0.005282218540324033,
+      0.005531810571557156,
+      0.17579979441989196,
+      0.19333417551755175,
+      0.19354548748874886,
+      0.19358538127812783,
+      0.19351835328532854,
+      0.19362231611161115,
+      0.19356119414941497,
+      0.19345231692169215,
+      0.1934655106210621,
+      0.19351392133213322,
+      0.193501100720072
+    ],
+    "caution": "Scan order preserved. Negatives are not clipped. Exclusion/provenance mapping unresolved."
+  },
+  "local_sensitivity": {
+    "assumptions": "Fixed initial stack and optical constants; equal absolute intensity noise; two independent multiplicative gains and shared angle shift. Not global identifiability or interval coverage.",
+    "steps": [
+      {
+        "step_nm_and_deg": 0.001,
+        "full_spectrum": {
+          "carbon_derivative_fraction_after_nuisance_projection": [
+            0.9958885199677067,
+            0.7302836012679096
+          ]
+        },
+        "13.5nm_only": {
+          "carbon_derivative_fraction_after_nuisance_projection": [
+            0.9920596917187948,
+            0.20532008470831964
+          ]
+        }
+      },
+      {
+        "step_nm_and_deg": 0.0005,
+        "full_spectrum": {
+          "carbon_derivative_fraction_after_nuisance_projection": [
+            0.9958885206180227,
+            0.7302836184714483
+          ]
+        },
+        "13.5nm_only": {
+          "carbon_derivative_fraction_after_nuisance_projection": [
+            0.9920596902741495,
+            0.20532010784943622
+          ]
+        }
+      }
+    ]
+  }
+}
