@@ -1,0 +1,49 @@
+{
+  "scope": "Software/physics consistency audit. Same saved parameters, no refit. Lower residual alone does not establish physical validity. Legacy remains available solely for reproduction.",
+  "quarter_wave_two_period_reflectivity": {
+    "legacy": 0.4245993756503642,
+    "continuous": 0.2696598543616658,
+    "analytic": 0.2696598543616657
+  },
+  "released_models": [
+    {
+      "tag": "131",
+      "max_intensity_difference_same_parameters": 0.05065398467329951,
+      "phase_difference_deg_same_parameters": -0.0517609356062685,
+      "legacy_amplitude_relative_residual": [
+        0.022751621727247432,
+        0.04895316767343607
+      ],
+      "continuous_amplitude_relative_residual_without_refit": [
+        0.041265574816901254,
+        0.07318665192349892
+      ]
+    },
+    {
+      "tag": "073",
+      "max_intensity_difference_same_parameters": 0.05679155291527027,
+      "phase_difference_deg_same_parameters": -0.026419193724589108,
+      "legacy_amplitude_relative_residual": [
+        0.021750994319035592,
+        0.039051586887277064
+      ],
+      "continuous_amplitude_relative_residual_without_refit": [
+        0.038578522646103335,
+        0.04189832150800388
+      ]
+    },
+    {
+      "tag": "074",
+      "max_intensity_difference_same_parameters": 0.046554638150826555,
+      "phase_difference_deg_same_parameters": -0.026603928296162874,
+      "legacy_amplitude_relative_residual": [
+        0.019287665914533642,
+        0.09904307188955008
+      ],
+      "continuous_amplitude_relative_residual_without_refit": [
+        0.03822752154553986,
+        0.0828741351445018
+      ]
+    }
+  ]
+}

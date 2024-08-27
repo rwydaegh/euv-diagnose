@@ -41,11 +41,28 @@ def transfer_matrix(thickness, nk, roughness, wavelength, angle, *, periods=0, c
     out = interfaces[:, 0].copy()
     for k in range(caps):
         out = out @ propagation[:, k] @ interfaces[:, k + 1]
-    if periods:
+    if periods and periodic_convention == 'legacy':
         period = np.broadcast_to(np.eye(2, dtype=complex), (n, 2, 2)).copy()
         for k in range(caps, layers):
             period = period @ propagation[:, k] @ interfaces[:, k + 1]
         out = out @ np.linalg.matrix_power(period, periods)
+    elif periods:
+        body = np.broadcast_to(np.eye(2, dtype=complex), (n, 2, 2)).copy()
+        for k in range(caps, layers):
+            body = body @ propagation[:, k]
+            if k + 1 < layers:
+                body = body @ interfaces[:, k + 1]
+        left = admittance[:, -2]
+        right = admittance[:, caps + 1]
+        kl = kz[:, -2]
+        kr = kz[:, caps + 1]
+        sigma = roughness[caps]
+        bp = (right + left) / (2 * left) * np.exp(-((kr - kl) * sigma) ** 2 / 2)
+        bm = -(right - left) / (2 * left) * np.exp(-((kr + kl) * sigma) ** 2 / 2)
+        boundary = np.empty((n, 2, 2), complex)
+        boundary[:, 0, 0] = boundary[:, 1, 1] = bp
+        boundary[:, 0, 1] = boundary[:, 1, 0] = bm
+        out = out @ np.linalg.matrix_power(body @ boundary, periods - 1) @ body @ interfaces[:, -1]
     if not np.isfinite(out).all():
         raise FloatingPointError('Transfer matrix overflow; requested stack not supported')
     return out
