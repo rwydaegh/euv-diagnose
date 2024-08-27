@@ -59,6 +59,14 @@ def test_vacuum_and_zero_thickness_limits():
         np.testing.assert_allclose(abs(1 / mat[:, 0, 0]) ** 2, 1, atol=1e-14)
 
 
+def test_domain_rejection():
+    with pytest.raises(ValueError):
+        transfer_matrix([-1], np.ones((1, 1)), [0, 0], np.array([13.5]), np.array([0.0]))
+    m = ReleasedModel.load(
+        ROOT / "research/sources/sherwin/FIlm models/Reflectivityapp_workspace_fit131.mat"
+    )
+    with pytest.raises(ValueError):
+        m.intensity(angle_shift=90)
 
 
 @pytest.mark.parametrize("periods", [1, 2, 5])
@@ -88,6 +96,22 @@ def test_repeated_cell_matches_explicit_layers(periods, pol):
     np.testing.assert_allclose(abs(c[:, 1, 0] / c[:, 0, 0]) ** 2, expected, atol=1e-12)
 
 
+def test_capped_periodic_stack_matches_explicit_layers():
+    wl = np.array([13.5, 14.0])
+    angles = np.array([6.0, 12.0])
+    nk = np.array([[0.99 - 0.001j, 0.98 - 0.01j, 0.97 - 0.02j]] * 2)
+    t = np.array([0.4, 3.5, 2.5])
+    rough = np.array([0.01, 0.02, 0.03, 0.04])
+    periods = 4
+    a = transfer_matrix(t, nk, rough, wl, angles, periods=periods, caps=1)
+    b = transfer_matrix(
+        np.r_[t[:1], np.tile(t[1:], periods)],
+        np.column_stack([nk[:, :1], np.tile(nk[:, 1:], (1, periods))]),
+        np.r_[rough[:1], np.tile(rough[1:-1], periods), rough[-1]],
+        wl,
+        angles,
+    )
+    np.testing.assert_allclose(a, b, rtol=1e-12, atol=1e-12)
 
 
 
