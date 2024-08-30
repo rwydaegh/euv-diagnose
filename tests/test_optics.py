@@ -40,6 +40,7 @@ def test_perturbed_original_complex_amplitude(tag, pol):
 
 @pytest.mark.parametrize("pol", ["s", "p"])
 def test_lossless_quarter_wave_slab(pol):
+    # Analytic normal-incidence quarter-wave film n=1.5 between vacuum.
     n = 1.5
     wl = np.array([600.0])
     mat = transfer_matrix(
@@ -78,7 +79,7 @@ def test_repeated_cell_matches_explicit_layers(periods, pol):
     t = np.array([100.0, 75.0])
     rough = np.array([0.1, 0.2, 0.3])
     a = transfer_matrix(t, nk, rough, wl, angles, periods=periods, caps=0, polarization=pol)
-
+    # First interface of each cell has rough[0], only the last exit has rough[-1].
     b = transfer_matrix(
         np.tile(t, periods),
         np.tile(nk, (1, periods)),
@@ -89,7 +90,7 @@ def test_repeated_cell_matches_explicit_layers(periods, pol):
     )
     np.testing.assert_allclose(a, b, rtol=1e-12, atol=1e-12)
     expected = ((1.5 / 2.0) ** (2 * periods) - 1) ** 2 / ((1.5 / 2.0) ** (2 * periods) + 1) ** 2
-
+    # Analytic quarter-wave stack, smooth interfaces.
     c = transfer_matrix(
         t, nk[1:2], np.zeros(3), wl[1:2], angles[1:2], periods=periods, caps=0, polarization=pol
     )
@@ -114,5 +115,26 @@ def test_capped_periodic_stack_matches_explicit_layers():
     np.testing.assert_allclose(a, b, rtol=1e-12, atol=1e-12)
 
 
+@pytest.mark.parametrize(
+    "kwargs",
+    [
+        {"caps": 0.5},
+        {"periods": 1.5},
+        {"periods": -1},
+        {"caps": 0},
+        {"periods": 1, "caps": 1},
+        {"polarization": "mixed"},
+        {"periodic_convention": "unknown"},
+    ],
+)
+def test_unsupported_kernel_configuration_is_explicit(kwargs):
+    with pytest.raises(ValueError):
+        transfer_matrix(
+            [1.0], np.array([[1.5]]), [0.0, 0.0], np.array([13.5]), np.array([0.0]), **kwargs
+        )
 
 
+def test_scalar_and_empty_wavelength_grids_are_rejected():
+    for wl in [np.array(13.5), np.array([])]:
+        with pytest.raises(ValueError):
+            transfer_matrix([1.0], np.array([[1.5]]), [0.0, 0.0], wl, np.array([0.0]))
