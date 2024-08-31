@@ -4,6 +4,7 @@ import numpy as np
 import pytest
 
 from euv_diagnose.data import read_observations
+from euv_diagnose.inference import fit, predict
 from euv_diagnose.optics import ReleasedModel
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -19,3 +20,15 @@ def test_negative_observations_preserved_and_missing_grid_rejected():
         read_observations(p, [[13.501, 2]])
 
 
+def test_synthetic_recovery_and_holdout_isolation():
+    m = ReleasedModel.load(SRC / "FIlm models/Reflectivityapp_workspace_fit131.mat")
+    truth = np.array([0.8, 1.04, 0.08, 0.0004])
+    y = predict(m, truth)
+    train = m.grid[:, 1] <= 5
+    first = fit(m, y, train, starts=1)
+    altered = y.copy()
+    altered[~train] += 10
+    second = fit(m, altered, train, starts=1)
+    assert first.success and second.success
+    np.testing.assert_allclose(first.parameters, truth, atol=1e-6)
+    np.testing.assert_array_equal(first.parameters, second.parameters)

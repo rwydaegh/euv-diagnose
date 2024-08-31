@@ -1,0 +1,173 @@
+{
+  "scope": "Exploratory repeat scan 22, multilayer only, initial stack fixed to saved fit. Not causal identification, calibrated uncertainty, or a blind final evaluation.",
+  "source_sha256": "d33ab7c89dcdfb960de85697cd1455e432d80342b971a0e7c135d7455dd46607",
+  "code_files_sha256": {
+    "scripts/run_classical_pilot.py": "4e6ebb769ac5896a4d7eda96c6858345f459f1ab455a6244404cf9b34a4ab19a",
+    "src/euv_diagnose/__init__.py": "f5e013cc0acf38a12482af5d51b756c134c70552cb7a67e012fadd76a48441e9",
+    "src/euv_diagnose/data.py": "3db70944bb3ad5ada052b1729c234b259ffcbcadcb503b125f6b3f4bfbb3f422",
+    "src/euv_diagnose/inference.py": "76faf6d728f88d49c6df67fe1d4128f214f2331c83fb1c3faa8571719634c996",
+    "src/euv_diagnose/optics.py": "b194d87f15aa380810b210ed1b99a6f108830f939ec2d72d9bc9ec8d0813ad42"
+  },
+  "code_revision": "8e6e2f24824dce6f01ed857445963d9dc73b8e5b",
+  "parameters": [
+    "carbon_nm",
+    "gain",
+    "angle_offset_deg",
+    "background"
+  ],
+  "bounds": {
+    "lower": [
+      0.0,
+      0.8,
+      -0.3,
+      -0.005
+    ],
+    "upper": [
+      6.0,
+      1.2,
+      0.3,
+      0.005
+    ]
+  },
+  "train_angles_deg": [
+    2,
+    3,
+    4,
+    5
+  ],
+  "test_angles_deg": [
+    6,
+    7,
+    8
+  ],
+  "weighting": "Equal absolute intensity residuals, no inferred noise covariance.",
+  "random_seed": 42,
+  "starts": 3,
+  "fits": [
+    {
+      "parameters": [
+        5.999999999999986,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "seconds": 0.2747438959777355,
+      "evaluations": 40,
+      "success": true,
+      "active_bounds": [
+        "carbon_nm"
+      ],
+      "train_rmse": 0.11846672491479049,
+      "mode": "carbon",
+      "test_rmse": 0.04583260023998547
+    },
+    {
+      "parameters": [
+        0.2567988521666895,
+        0.9100410789058903,
+        0.29999999999999993,
+        0.004999999999999999
+      ],
+      "seconds": 0.7464051558636129,
+      "evaluations": 112,
+      "success": true,
+      "active_bounds": [
+        "angle_offset_deg",
+        "background"
+      ],
+      "train_rmse": 0.11879537785387498,
+      "mode": "calibration",
+      "test_rmse": 0.04370105141883037
+    },
+    {
+      "parameters": [
+        5.999999999999999,
+        1.0251214747311035,
+        0.25250141609517995,
+        0.004999999999999999
+      ],
+      "seconds": 0.9368771200533956,
+      "evaluations": 140,
+      "success": true,
+      "active_bounds": [
+        "carbon_nm",
+        "background"
+      ],
+      "train_rmse": 0.11743728256689648,
+      "mode": "joint",
+      "test_rmse": 0.045649874720973725
+    }
+  ],
+  "mean_forward_seconds_20_calls": 0.007100071245804429,
+  "noiseless_synthetic_recovery": {
+    "truth": [
+      0.8,
+      1.04,
+      0.08,
+      0.0004
+    ],
+    "recovered": [
+      0.7999999999919618,
+      1.0399999999998901,
+      0.0799999999949247,
+      0.00040000000000268944
+    ],
+    "max_abs_prediction_error": 5.626610288800293e-13,
+    "seconds": 0.6403388360049576,
+    "success": true
+  },
+  "sensitivity_excluding_2deg": {
+    "reason": "Strong anomalous spectral shape at labeled 2 degrees; cause unresolved. Post-hoc sensitivity, not corrected data.",
+    "fits": [
+      {
+        "parameters": [
+          1.2324348380634025,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "seconds": 0.4368561420124024,
+        "evaluations": 68,
+        "success": true,
+        "active_bounds": [],
+        "train_rmse": 0.010265723813799773,
+        "mode": "carbon",
+        "test_rmse": 0.02182742026543902
+      },
+      {
+        "parameters": [
+          0.2567988521666895,
+          1.0041532038689305,
+          -0.29999999999999993,
+          -0.00023874002757356795
+        ],
+        "seconds": 0.5507865569088608,
+        "evaluations": 84,
+        "success": true,
+        "active_bounds": [
+          "angle_offset_deg"
+        ],
+        "train_rmse": 0.010001171187876464,
+        "mode": "calibration",
+        "test_rmse": 0.018106882194952108
+      },
+      {
+        "parameters": [
+          1.2930822592030706,
+          1.0224521473074757,
+          -0.2999999999999992,
+          -0.0008422774781787235
+        ],
+        "seconds": 0.9143814940471202,
+        "evaluations": 146,
+        "success": true,
+        "active_bounds": [
+          "angle_offset_deg"
+        ],
+        "train_rmse": 0.004586548218819281,
+        "mode": "joint",
+        "test_rmse": 0.011406462687613243
+      }
+    ]
+  }
+}
