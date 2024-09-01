@@ -19,9 +19,14 @@ from scipy.optimize import least_squares
 from euv_diagnose.optics import ReleasedModel
 
 parser = argparse.ArgumentParser(description=__doc__)
-parser.set_defaults(material_fraction=None)
+parser.add_argument(
+    "--material-fraction",
+    type=float,
+    default=None,
+    help="Optionally restrict each free concentration to this fractional range around nominal; an illustrative sensitivity assumption.",
+)
 parser.add_argument("--target-deg", type=float, default=1.0)
-parser.set_defaults(output_name="phase-ambiguity-probe")
+parser.add_argument("--output-name", default="phase-ambiguity-probe")
 parser.add_argument("--periodic-convention", choices=["legacy", "continuous"], default="legacy")
 args = parser.parse_args()
 if args.material_fraction is not None and not 0 < args.material_fraction < 1:
