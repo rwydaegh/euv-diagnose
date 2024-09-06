@@ -1,0 +1,10 @@
+{
+  "probe": {
+    "nominal_max_complex_error": 4.669540497562317e-15,
+    "candidate_max_complex_error": 5.56089035668383e-15
+  },
+  "tight": {
+    "nominal_max_complex_error": 4.669540497562317e-15,
+    "candidate_max_complex_error": 4.47545209131181e-15
+  }
+}
