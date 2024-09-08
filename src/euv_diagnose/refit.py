@@ -55,6 +55,7 @@ def fit_stack(
     train,
     bounds: StackBounds,
     *,
+    calibration=False,
     starts=3,
     seed=131,
     max_nfev=250,
@@ -67,7 +68,6 @@ def fit_stack(
     The first start is supplied/saved; others perturb it by 15% of bound widths.
     Fixed coordinates use the released table's fixed values.
     """
-    calibration = False
     observed = np.asarray(observed, dtype=float)
     train = np.asarray(train, dtype=bool)
     if (
