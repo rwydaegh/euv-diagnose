@@ -1,3 +1,5 @@
+"""The held-out observations must not affect the fitted objective or scales."""
+
 from dataclasses import dataclass
 
 import numpy as np
@@ -57,3 +59,29 @@ def test_invalid_bounds_and_empty_training_rejected():
         fit_stack(model, model.intensity([1.4]), [False] * 3, bounds)
 
 
+def test_recorded_fit_reproduces_continuous_predictions():
+    """The browser-facing saved run must agree with the shipped physical solver."""
+    import json
+    from pathlib import Path
+
+    from euv_diagnose.optics import ReleasedModel
+
+    root = Path(__file__).resolve().parents[1]
+    report = json.loads((root / "research/results/refit-measured.json").read_text())
+    model = ReleasedModel.load(
+        root / "research/sources/sherwin/FIlm models/Reflectivityapp_workspace_fit131.mat"
+    )
+    model.periodic_convention = "continuous"
+    for result in report["fits"]:
+        best = result["best"]
+        prediction = model.intensity(
+            best["parameters"], angle_shift=best["angle_offset_deg"]
+        ) * np.array(best["gains"])
+        np.testing.assert_allclose(prediction, best["prediction_reflectivity"], atol=1e-12)
+        train = model.grid[:, 1] <= 5
+        observed = np.array(report["observed_reflectivity"])
+        np.testing.assert_allclose(
+            np.sqrt(np.mean((prediction[~train] - observed[~train]) ** 2, axis=0)),
+            best["holdout_rmse"],
+            atol=1e-12,
+        )
