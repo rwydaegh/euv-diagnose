@@ -50,6 +50,28 @@ def bounds(model, ids, material, lower, upper, fraction=0.03):
     return low, high
 
 
+def simulate(model, ids, low, high, phase_zero, count, seed, shifted=False):
+    rng = np.random.default_rng(seed)
+    spectra, phases, parameters = [], [], []
+    for _ in range(count):
+        physical = rng.uniform(low, high)
+        nuisance = np.r_[rng.uniform(0.98, 1.02, 2), rng.uniform(-0.1, 0.1)]
+        x = model.x.copy()
+        x[ids] = physical
+        amplitude = model.amplitude(x, angle_shift=nuisance[2])
+        values = abs(amplitude[:-1]) ** 2 * nuisance[:2]
+        values += rng.normal(size=values.shape) * np.array([1e-4, 1e-3])
+        if shifted:
+            ripple = np.sin((model.grid[:-1, 0] - 12.5) * np.pi * 2 + rng.uniform(0, 2 * np.pi))
+            values += ripple[:, None] * np.array([3e-4, 3e-3])
+
+        target_model = replace(model, grid=model.grid[-1:], factors=model.factors[-1:])
+        target = target_model.amplitude(x)[0]
+        phase = np.angle(target[0] / target[1] * np.exp(-1j * np.deg2rad(phase_zero)), deg=True)
+        spectra.append(values.ravel())
+        phases.append(phase)
+        parameters.append(np.r_[physical, nuisance])
+    return np.asarray(spectra), np.asarray(phases), np.asarray(parameters)
 
 
 
