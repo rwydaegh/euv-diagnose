@@ -2,9 +2,48 @@ import numpy as np
 import pytest
 from sklearn.neural_network import MLPRegressor
 
-from euv_diagnose.learning import phase_error
+from euv_diagnose.learning import PhaseEnsemble, phase_error
 
 
+def test_portable_network_matches_sklearn(tmp_path):
+    rng = np.random.default_rng(13)
+    x = rng.normal(size=(80, 3))
+    y = x[:, 0] * x[:, 1] + 0.2 * x[:, 2]
+    estimator = MLPRegressor(
+        hidden_layer_sizes=(8, 4), solver="lbfgs", max_iter=2000, random_state=8
+    ).fit(x, y)
+    arrays = {
+        "input_mean": np.array([0.1, 0.2, -0.1]),
+        "input_scale": np.array([2.0, 0.5, 1.0]),
+        "target_mean": 3.0,
+        "target_scale": 2.0,
+        "members": 1,
+        "layers": 3,
+        "levels": np.array([0.9]),
+        "radii": np.array([1.2]),
+    }
+    for layer, (weights, bias) in enumerate(
+        zip(estimator.coefs_, estimator.intercepts_, strict=True)
+    ):
+        arrays[f"w_0_{layer}"] = weights
+        arrays[f"b_0_{layer}"] = bias
+    path = tmp_path / "model.npz"
+    np.savez_compressed(path, **arrays)
+    portable = PhaseEnsemble.load(path)
+    observation = rng.normal(size=(7, 3))
+    expected = (
+        estimator.predict((observation - arrays["input_mean"]) / arrays["input_scale"]) * 2 + 3
+    )
+    np.testing.assert_allclose(portable.predict(observation), expected, rtol=1e-12, atol=1e-12)
+    interval = portable.interval(observation)
+    np.testing.assert_allclose(interval[:, 0], expected - 1.2)
+    np.testing.assert_allclose(interval[:, 1], expected + 1.2)
+    with pytest.raises(ValueError, match="Coverage"):
+        portable.interval(observation, 0.8)
+    with pytest.raises(ValueError, match="finite spectra"):
+        portable.predict(np.ones((3, 2)))
+    with pytest.raises(ValueError, match="finite spectra"):
+        portable.predict(np.array([np.nan, 1.0, 2.0]))
 
 
 
