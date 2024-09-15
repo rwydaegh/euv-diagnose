@@ -80,3 +80,51 @@ def simulate(model, ids, low, high, phase_zero, count, seed, shifted=False):
 
 
 
+
+
+def train(splits, model, phase_zero, members=5):
+    features, truth, _ = splits["train"]
+    scaler = StandardScaler().fit(features)
+    target_mean, target_scale = np.mean(truth), np.std(truth)
+    train_features = scaler.transform(features)
+    arrays = {
+        "input_mean": scaler.mean_,
+        "input_scale": scaler.scale_,
+        "target_mean": target_mean,
+        "target_scale": target_scale,
+        "members": members,
+        "layers": 3,
+        "grid": model.grid[:-1],
+        "phase_reference_deg": phase_zero,
+        "levels": np.array([0.5, 0.8, 0.9, 0.95]),
+    }
+    training_start = time.perf_counter()
+    training_records = []
+    for member in range(members):
+        estimator = MLPRegressor(
+            hidden_layer_sizes=(128, 64),
+            alpha=0.1,
+            max_iter=400,
+            early_stopping=True,
+            validation_fraction=0.15,
+            n_iter_no_change=25,
+            learning_rate_init=0.001,
+            batch_size=128,
+            random_state=900 + member,
+        )
+        estimator.fit(train_features, (truth - target_mean) / target_scale)
+        for layer, (weight, bias) in enumerate(
+            zip(estimator.coefs_, estimator.intercepts_, strict=True)
+        ):
+            arrays[f"w_{member}_{layer}"] = weight
+            arrays[f"b_{member}_{layer}"] = bias
+        training_records.append(
+            {
+                "iterations": estimator.n_iter_,
+                "internal_validation_r2": estimator.best_validation_score_,
+            }
+        )
+        print(f"Trained member {member}: {training_records[-1]}", flush=True)
+    training_seconds = time.perf_counter() - training_start
+    ridge = RidgeCV(alphas=np.logspace(-4, 4, 17), cv=5).fit(train_features, truth)
+    return arrays, ridge, scaler
