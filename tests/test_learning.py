@@ -2,7 +2,7 @@ import numpy as np
 import pytest
 from sklearn.neural_network import MLPRegressor
 
-from euv_diagnose.learning import PhaseEnsemble, phase_error
+from euv_diagnose.learning import PhaseEnsemble, conformal_radius, phase_error
 
 
 def test_portable_network_matches_sklearn(tmp_path):
@@ -46,8 +46,16 @@ def test_portable_network_matches_sklearn(tmp_path):
         portable.predict(np.array([np.nan, 1.0, 2.0]))
 
 
+def test_conformal_quantile_uses_finite_sample_rank():
+    assert conformal_radius(np.arange(1.0, 10.0), 0.9) == 9
+    assert conformal_radius(np.arange(1.0, 10.0), 0.5) == 5
+    assert np.isinf(conformal_radius(np.arange(1.0, 10.0), 0.99))
 
 
+@pytest.mark.parametrize("errors,level", [([], 0.9), ([np.nan], 0.9), ([-1.0], 0.9), ([1.0], 1.0)])
+def test_invalid_calibration_rejected(errors, level):
+    with pytest.raises(ValueError):
+        conformal_radius(errors, level)
 
 
 def test_phase_errors_cross_branch_cut():
