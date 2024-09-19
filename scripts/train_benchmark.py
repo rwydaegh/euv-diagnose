@@ -237,9 +237,9 @@ def run(args):
     ]:
         predict(sample)
         tick = time.perf_counter()
-        for _ in range(1):
+        for _ in range(500):
             predict(sample)
-        latency[name] = (time.perf_counter() - tick) / 1
+        latency[name] = (time.perf_counter() - tick) / 500
     physical_results = []
     physical_start = time.perf_counter()
     # A bounded point-fit baseline, not a posterior or a convergence guarantee.
