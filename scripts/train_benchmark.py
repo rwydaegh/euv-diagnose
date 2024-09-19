@@ -382,7 +382,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--train", type=int, default=8000)
     parser.add_argument("--members", type=int, default=5)
-    parser.add_argument("--physical-cases", type=int, default=4)
+    parser.add_argument("--physical-cases", type=int, default=32)
     args = parser.parse_args()
     if args.train < 100 or args.members < 1 or args.physical_cases < 0 or args.physical_cases > 500:
         parser.error("Use at least 100 training cases, one member, and 0–500 physical cases")

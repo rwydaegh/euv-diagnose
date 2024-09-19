@@ -1,3 +1,5 @@
+"""Check portable inference and calibration mechanics independently of training."""
+
 import numpy as np
 import pytest
 from sklearn.neural_network import MLPRegressor
@@ -47,6 +49,7 @@ def test_portable_network_matches_sklearn(tmp_path):
 
 
 def test_conformal_quantile_uses_finite_sample_rank():
+    # ceil((9+1)*.9)=9; a naive empirical percentile would be too small.
     assert conformal_radius(np.arange(1.0, 10.0), 0.9) == 9
     assert conformal_radius(np.arange(1.0, 10.0), 0.5) == 5
     assert np.isinf(conformal_radius(np.arange(1.0, 10.0), 0.99))
@@ -64,3 +67,21 @@ def test_phase_errors_cross_branch_cut():
     )
 
 
+def test_published_checkpoint_reproduces_evaluation():
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parents[1]
+    model = PhaseEnsemble.load(root / "artifacts/model-phase-ensemble.npz")
+    with np.load(root / "research/results/learning-evaluation.npz", allow_pickle=False) as data:
+        for regime in ("nominal", "shifted"):
+            np.testing.assert_allclose(
+                model.predict(data[f"{regime}_spectra"]),
+                data[f"{regime}_prediction"],
+                rtol=1e-10,
+                atol=1e-10,
+            )
+        errors = abs(
+            phase_error(model.predict(data["calibration_spectra"]), data["calibration_phase"])
+        )
+        expected = [conformal_radius(errors, level) for level in model.arrays["levels"]]
+        np.testing.assert_allclose(model.arrays["radii"], expected, rtol=1e-10, atol=1e-10)
