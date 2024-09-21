@@ -47,13 +47,13 @@ function plot(
   const grid = ticks
     .map(
       (v, i) =>
-        `<line x1="52" x2="620" y1="${176 - i * 40.5}" y2="${176 - i * 40.5}" stroke="#e4e9ed"/>`,
+        `<line x1="52" x2="620" y1="${176 - i * 40.5}" y2="${176 - i * 40.5}" stroke="#e4e9ed"/><text x="42" y="${180 - i * 40.5}" text-anchor="end">${Math.abs(v) < 0.01 && v !== 0 ? v.toExponential(1) : number(v, Math.abs(domain[1]) < 0.1 ? 3 : 2)}</text>`,
     )
     .join("");
   const xticks = [xs[0], xs[Math.floor(xs.length / 2)], xs[xs.length - 1]]
     .map(
       (x) =>
-        ``,
+        `<text x="${52 + ((x - xs[0]) / (xs[xs.length - 1] - xs[0])) * 568}" y="198" text-anchor="middle">${number(x, 1)}</text>`,
     )
     .join("");
   const paths = curves
@@ -72,7 +72,7 @@ function plot(
         }`,
     )
     .join("");
-  return `<svg class="plot" viewBox="0 0 640 214" role="img" aria-label="${escape(label)}"><title>${escape(label)}</title><g font-family="system-ui,sans-serif" font-size="10" fill="#647181">${grid}${xticks}</g>${paths}</svg><div class="plot-key"><span>${escape(unit)}</span>${curves.map((c) => `<span><i style="background:${c.color}"></i>${escape(c.label)}</span>`).join("")}</div>`;
+  return `<svg class="plot" viewBox="0 0 640 214" role="img" aria-label="${escape(label)}"><title>${escape(label)}</title><g font-family="system-ui,sans-serif" font-size="10" fill="#647181">${grid}${xticks}<text x="336" y="213" text-anchor="middle">Wavelength / nm</text></g>${paths}</svg><div class="plot-key"><span>${escape(unit)}</span>${curves.map((c) => `<span><i style="background:${c.color}"></i>${escape(c.label)}</span>`).join("")}</div>`;
 }
 
 function stack(): string {
@@ -147,11 +147,11 @@ function scatter(): string {
   ]
     .map((i) => {
       const v = low + ((high - low) * i) / 4;
-      return `<line x1="55" x2="595" y1="${y(v)}" y2="${y(v)}" stroke="#e2e9eb"/>`;
+      return `<line x1="55" x2="595" y1="${y(v)}" y2="${y(v)}" stroke="#e2e9eb"/><text x="46" y="${y(v) + 4}" text-anchor="end" font-size="10" fill="#687984">${number(v, 0)}</text><text x="${x(v)}" y="289" text-anchor="middle" font-size="10" fill="#687984">${number(v, 0)}</text>`;
     })
     .join(
       "",
-    )}<path d="M55 270L595 25" stroke="#9cacb4" stroke-dasharray="5 4"/>${e.truth.map((v, i) => `<circle cx="${x(v)}" cy="${y(e.prediction[i])}" r="2.4" fill="${evaluation ? "#c97942" : "#188c88"}" opacity=".45"/>`).join("")}</svg></div>`;
+    )}<path d="M55 270L595 25" stroke="#9cacb4" stroke-dasharray="5 4"/>${e.truth.map((v, i) => `<circle cx="${x(v)}" cy="${y(e.prediction[i])}" r="2.4" fill="${evaluation ? "#c97942" : "#188c88"}" opacity=".45"/>`).join("")}<text x="325" y="312" text-anchor="middle" font-size="11" fill="#687984">True phase offset / °</text><text transform="translate(13 150) rotate(-90)" text-anchor="middle" font-size="11" fill="#687984">Predicted phase offset / °</text></svg></div>`;
 }
 function learningView(): string {
   const l = data.learning;
@@ -226,13 +226,7 @@ function bind(): void {
       render();
       document.querySelector<HTMLInputElement>("#angle")?.focus();
     };
-    slider.oninput = () => {
-      const angles =
-        tab === "measured" ? data.measured!.angles : data.synthetic.angles;
-      document.querySelector("#angle-value")!.textContent =
-        `${angles[Number(slider.value)]}°`;
-    };
-    slider.onchange = commit;
+    slider.oninput = commit;
   }
 
   const reveal = document.querySelector<HTMLButtonElement>("#reveal");
