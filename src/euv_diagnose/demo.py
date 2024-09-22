@@ -39,8 +39,12 @@ def rectangular_spectra(grid: np.ndarray, values: np.ndarray) -> tuple[list, lis
             int(np.searchsorted(angles, point[1])),
             int(np.searchsorted(wavelengths, point[0])),
         )
+        if location in seen:
+            raise ValueError("Duplicate wavelength/angle pair")
         seen.add(location)
         spectra[location] = value
+    if not np.isfinite(spectra).all():
+        raise ValueError("Browser bundle requires a complete wavelength/angle grid")
     return wavelengths.tolist(), angles.tolist(), spectra.tolist()
 
 
