@@ -1,3 +1,5 @@
+"""Release-level tests of export conventions and useful CLI failures."""
+
 import json
 from dataclasses import replace
 from pathlib import Path
@@ -62,5 +64,13 @@ def test_export_matches_saved_scientific_result(tmp_path):
     assert len(loaded["learning"]["evaluations"][0]["truth"]) == 500
 
 
+def test_cli_reports_missing_checkout_without_traceback(tmp_path, capsys):
+    assert main(["--workspace", str(tmp_path), "inspect"]) == 2
+    assert "checkout" in capsys.readouterr().err
 
 
+def test_cli_export(tmp_path, capsys):
+    output = tmp_path / "demo.json"
+    assert main(["--workspace", str(ROOT), "export", "--output", str(output)]) == 0
+    assert output.is_file()
+    assert "Wrote" in capsys.readouterr().out
