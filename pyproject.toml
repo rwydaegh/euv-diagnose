@@ -11,3 +11,6 @@ build-backend = "hatchling.build"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[project.scripts]
+euv-diagnose = "euv_diagnose.cli:main"
