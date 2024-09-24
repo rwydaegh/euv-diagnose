@@ -96,7 +96,7 @@ test("measured and learned exhibits display data with appropriate limits", async
   await page.keyboard.press("End");
   await expect(page.locator("#angle-value")).toHaveText("8°");
   await expect(
-    page.getByRole("heading", { name: "A held-out angle." }),
+    page.getByRole("heading", { name: "An exploratory holdout." }),
   ).toBeVisible();
   await assertNoOverflow(page);
   await page.getByRole("button", { name: "Learned inference" }).click();
