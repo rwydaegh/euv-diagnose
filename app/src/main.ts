@@ -226,7 +226,13 @@ function bind(): void {
       render();
       document.querySelector<HTMLInputElement>("#angle")?.focus();
     };
-    slider.oninput = commit;
+    slider.oninput = () => {
+      const angles =
+        tab === "measured" ? data.measured!.angles : data.synthetic.angles;
+      document.querySelector("#angle-value")!.textContent =
+        `${angles[Number(slider.value)]}°`;
+    };
+    slider.onchange = commit;
   }
 
   const reveal = document.querySelector<HTMLButtonElement>("#reveal");
