@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "Please cite this software and the upstream experimental work when using these examples."
+title: "EUV-Diagnose: reflectometry, phase ambiguity, and learned inference"
+type: software
+version: 0.1.0
+date-released: 2026-09-18
+license: MIT
+authors:
+  - name: "EUV-Diagnose contributors"
+abstract: "A reproducible CPU benchmark and interactive workbench for EUV reflectometry, physical-model checks, and synthetic phase inference."
+references:
+  - type: article
+    title: "Picometer sensitivity metrology for EUV absorber phase"
+    doi: "10.1117/1.JMM.20.3.031011"
+    authors:
+      - family-names: Sherwin
+        given-names: Stuart
+    year: 2021

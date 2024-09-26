@@ -1,0 +1,15 @@
+repos:
+  - repo: local
+    hooks:
+      - id: ruff-check
+        name: Ruff lint
+        entry: uv run --locked ruff check
+        language: system
+        types: [python]
+        files: ^(src|tests|scripts)/
+      - id: ruff-format
+        name: Ruff format check
+        entry: uv run --locked ruff format --check
+        language: system
+        types: [python]
+        files: ^(src|tests|scripts)/
