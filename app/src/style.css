@@ -539,7 +539,10 @@ footer {
     max-width: 420px;
   }
   .provenance-grid,
-  .scatter-section,
+  .scatter-section {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
   .metrics-table th,
   .metrics-table td {
     padding: 8px 6px;

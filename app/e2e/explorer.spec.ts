@@ -5,7 +5,7 @@ import AxeBuilder from "@axe-core/playwright";
 async function openExplorer(page: Page) {
   await page.goto("/");
   await expect(
-    page.getByRole("heading", { name: "Two stacks. One reflection?" }),
+    page.getByRole("heading", { name: "Two synthetic stacks" }),
   ).toBeVisible();
 }
 
@@ -84,7 +84,7 @@ test("measured and learned exhibits display data with appropriate limits", async
   await openExplorer(page);
   await page.getByRole("button", { name: "Measured spectra" }).click();
   await expect(
-    page.getByRole("heading", { name: "The model meets real light." }),
+    page.getByRole("heading", { name: "Measured reflectivity and refit" }),
   ).toBeVisible();
   await expect(
     page.getByRole("img", {
@@ -100,11 +100,12 @@ test("measured and learned exhibits display data with appropriate limits", async
   ).toBeVisible();
   await assertNoOverflow(page);
   await page.getByRole("button", { name: "Learned inference" }).click();
-  await expect(page.locator(".metric-grid > div")).not.toHaveCount(0);
-  await expect(
-    page.getByRole("heading", { name: "Evaluation boundaries" }),
-  ).toBeVisible();
+  await expect(page.locator(".metrics-table tbody tr")).not.toHaveCount(0);
   await expect(page.locator(".scatter circle")).toHaveCount(500);
+  if (page.viewportSize()!.width < 700) {
+    const plotBox = (await page.locator(".scatter").boundingBox())!;
+    expect(plotBox.width).toBeGreaterThan(page.viewportSize()!.width * 0.8);
+  }
   const nominalPoint = await page
     .locator(".scatter circle")
     .first()
@@ -122,9 +123,11 @@ test("measured and learned exhibits display data with appropriate limits", async
   expect(
     await page.locator(".scatter circle").first().getAttribute("cy"),
   ).not.toEqual(nominalPoint);
-  await page
-    .getByRole("button", { name: "Assumptions, provenance & exports" })
-    .click();
+  await page.getByRole("button", { name: "Methods and assumptions" }).click();
+  await expect(page.locator("#provenance-content")).toBeVisible();
+  await expect(page.locator("#provenance-content")).toContainText(
+    "Experimental phase accuracy has not been established",
+  );
   await expect(
     page.getByRole("button", { name: "Spectra CSV" }),
   ).toBeDisabled();
@@ -138,12 +141,9 @@ test("exports contain reproducible data and a standalone figure", async ({
   page,
 }) => {
   await openExplorer(page);
-  await page
-    .getByRole("button", { name: "Assumptions, provenance & exports" })
-    .click();
   await expect(
-    page.getByRole("button", { name: "Assumptions, provenance & exports" }),
-  ).toHaveAttribute("aria-expanded", "true");
+    page.getByRole("button", { name: "Methods and assumptions" }),
+  ).toHaveAttribute("aria-expanded", "false");
   for (const [name, filename] of [
     ["Result JSON", "euv-diagnose-results.json"],
     ["Spectra CSV", "euv-diagnose-spectra.csv"],
@@ -170,7 +170,7 @@ test("exports contain reproducible data and a standalone figure", async ({
     } else {
       expect(content).toContain('xmlns="http://www.w3.org/2000/svg"');
       expect(content).toContain("<path");
-      expect(content).toContain("Wavelength / nm");
+      expect(content).toContain("Wavelength (nm)");
     }
     await expect(page.getByRole("status")).toHaveText(`Downloaded ${filename}`);
   }
@@ -181,7 +181,7 @@ test("keyboard navigation works with reduced motion", async ({ page }) => {
   await openExplorer(page);
   await page.keyboard.press("Tab");
   await expect(
-    page.getByRole("link", { name: "Skip to explorer" }),
+    page.getByRole("link", { name: "Skip to results" }),
   ).toBeFocused();
   await page.keyboard.press("Enter");
   await page.getByRole("button", { name: "Measured spectra" }).focus();
@@ -206,7 +206,7 @@ test("a missing result bundle presents a useful recovery state", async ({
   );
   await page.goto("/");
   await expect(
-    page.getByRole("heading", { name: "Couldn’t open the experiment." }),
+    page.getByRole("heading", { name: "Could not load results." }),
   ).toBeVisible();
   await expect(page.getByRole("button", { name: "Try again" })).toBeVisible();
   await assertNoOverflow(page);
@@ -248,9 +248,7 @@ test("measured model comparison updates both phase and exported predictions", as
     phase,
   );
   await expect(page.getByLabel("Model assumptions")).toBeFocused();
-  await page
-    .getByRole("button", { name: "Assumptions, provenance & exports" })
-    .click();
+  await page.getByRole("button", { name: "Methods and assumptions" }).click();
   const pending = page.waitForEvent("download");
   await page.getByRole("button", { name: "Spectra CSV" }).click();
   const content = await readFile((await (await pending).path())!, "utf8");
