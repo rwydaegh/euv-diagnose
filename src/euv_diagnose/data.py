@@ -1,5 +1,3 @@
-"""Read released intensity measurements without clipping negative observations."""
-
 from pathlib import Path
 
 import numpy as np
@@ -7,10 +5,6 @@ from scipy.io import loadmat
 
 
 def read_observations(path: str | Path, grid, *, scan=None):
-    """Match exact released wavelengths/angles; never interpolate silently.
-
-    scan is zero-based for a multi-acquisition file. Output follows grid order.
-    """
     d = loadmat(path, simplify_cells=True)
     values = np.asarray(d["R"], dtype=float)
     if values.ndim == 3:

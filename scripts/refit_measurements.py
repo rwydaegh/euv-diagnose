@@ -1,5 +1,3 @@
-"""Reproduce the continuous-boundary, angle-split fit of measured mask 131."""
-
 import argparse
 import hashlib
 import json
@@ -21,7 +19,6 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def git_metadata(root: Path) -> dict:
-    """Preserve provenance when available without requiring a Git checkout."""
     try:
         revision = subprocess.check_output(
             ["git", "rev-parse", "HEAD"], cwd=root, text=True, stderr=subprocess.DEVNULL
@@ -40,7 +37,9 @@ def git_metadata(root: Path) -> dict:
 
 
 def main():
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(
+        description="Reproduce the continuous-boundary, angle-split fit of measured mask 131."
+    )
     parser.add_argument("--starts", type=int, default=3)
     parser.add_argument("--max-nfev", type=int, default=1200)
     args = parser.parse_args()

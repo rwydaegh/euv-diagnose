@@ -1,5 +1,3 @@
-"""Train and evaluate a fixed-grid synthetic EUV phase regressor on CPU."""
-
 import argparse
 import hashlib
 import json
@@ -64,10 +62,9 @@ def simulate(model, ids, low, high, phase_zero, count, seed, shifted=False):
         values = abs(amplitude[:-1]) ** 2 * nuisance[:2]
         values += rng.normal(size=values.shape) * np.array([1e-4, 1e-3])
         if shifted:
-            # A correlated wavelength-dependent reduction error absent in training.
             ripple = np.sin((model.grid[:-1, 0] - 12.5) * np.pi * 2 + rng.uniform(0, 2 * np.pi))
             values += ripple[:, None] * np.array([3e-4, 3e-3])
-        # Target is nominal instrument angle, not the unknown acquisition offset.
+
         target_model = replace(model, grid=model.grid[-1:], factors=model.factors[-1:])
         target = target_model.amplitude(x)[0]
         phase = np.angle(target[0] / target[1] * np.exp(-1j * np.deg2rad(phase_zero)), deg=True)
@@ -104,7 +101,6 @@ def score(truth, prediction, radii, levels):
 
 
 def plot_benchmark(evaluation_path, report_path, output_path):
-    """Render stored evaluation results without retraining or changing metrics."""
     report = json.loads(Path(report_path).read_text())
     with np.load(evaluation_path, allow_pickle=False) as evaluation:
         fig, axes = plt.subplots(1, 2, figsize=(10, 4.3), layout="constrained")
@@ -242,7 +238,7 @@ def run(args):
         latency[name] = (time.perf_counter() - tick) / 500
     physical_results = []
     physical_start = time.perf_counter()
-    # A bounded point-fit baseline, not a posterior or a convergence guarantee.
+
     selection_rng = np.random.default_rng(715)
     subset = selection_rng.choice(500, args.physical_cases, replace=False)
     for index in subset:
@@ -379,7 +375,9 @@ def run(args):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(
+        description="Train and evaluate a fixed-grid synthetic EUV phase regressor on CPU."
+    )
     parser.add_argument("--train", type=int, default=8000)
     parser.add_argument("--members", type=int, default=5)
     parser.add_argument("--physical-cases", type=int, default=32)

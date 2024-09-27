@@ -5,12 +5,11 @@ function [layer_nk] = getMLnk(N_ML,n_cap,n_per,amu,rho_nom,f0f1,composition,lamb
     
     composition = reshape(composition,length(rho_nom),n);
     
-    re = 2.8179e-15; % classical electron radius [m]
-    Na = 6.0221409e23; % Avogodro's number
-    na = rho_nom./amu * Na; % atoms/cm^3
+    re = 2.8179e-15;
+    Na = 6.0221409e23;
+    na = rho_nom./amu * Na;
     const = 1e-12 * lambda.^2 .* re / (2*pi);
     
-%     composition = reshape(composition,[],size(thick,1),size(thick,2));
     
     nk = 1 - const .*  f0f1*reshape(na.*composition,length(na),[]);
     nk = reshape(nk,length(lambda),n);

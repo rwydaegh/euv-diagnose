@@ -1,5 +1,3 @@
-"""Rebuild the browser bundle from checked scientific artifacts."""
-
 from pathlib import Path
 
 from euv_diagnose.demo import build_bundle

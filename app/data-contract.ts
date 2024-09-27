@@ -1,7 +1,6 @@
-/** Every angle is in degrees from normal; wavelength is in nm; spectra are intensity fractions. */
 export interface ModelSpectra {
-  spectra: number[][][]; // [angle][wavelength][absorber, multilayer]
-  phaseDeg: number; // arg(r_absorber/r_multilayer), common reference plane, at 13.5 nm / 6°
+  spectra: number[][][];
+  phaseDeg: number;
 }
 export interface DemoData {
   schemaVersion: 1;
@@ -14,8 +13,8 @@ export interface DemoData {
     alternative: ModelSpectra;
     sigma: [number, number];
     phaseDifferenceDeg: number;
-    baselineDistance: number; // full 2–8° joint whitened Euclidean distance
-    distances: number[]; // one per angle; joint two-channel whitened Euclidean distance
+    baselineDistance: number;
+    distances: number[];
     metadata: {
       title?: string;
       description?: string;

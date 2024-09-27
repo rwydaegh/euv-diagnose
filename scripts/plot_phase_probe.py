@@ -1,5 +1,3 @@
-"""Plot saved witnesses and angle audits without recomputing scientific results."""
-
 import json
 from pathlib import Path
 

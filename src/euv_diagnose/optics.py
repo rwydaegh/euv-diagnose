@@ -1,12 +1,3 @@
-"""NumPy port of the Sherwin MIT-licensed thin-film transfer-matrix model.
-
-Original: https://github.com/s-sherwin/EUV, commit 5cce3c9.
-Copyright (c) 2022 Stuart Sherwin. License retained in THIRD_PARTY_NOTICES.md.
-Wavelength/thickness/roughness: nm. Angles: degrees from the surface normal.
-This preserves the upstream phase, roughness, and empirical correction conventions;
-it is not a general validated solver for arbitrary stacks.
-"""
-
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -26,14 +17,6 @@ def transfer_matrix(
     polarization="s",
     periodic_convention="continuous",
 ):
-    """Return (N,2,2) matrices, with vacuum incident/exit media.
-
-    nk is (N,L); roughness is (L+1,). If periods>0, layers after
-    caps specify one repeated period. Layer thicknesses must be nonnegative.
-    Complex nk uses the upstream negative-imaginary absorption convention.
-    'continuous' joins repeated cells directly; 'legacy' reproduces the
-    upstream shortcut including its inconsistent cell-boundary interface.
-    """
     thickness = np.asarray(thickness, dtype=float)
     wavelength = np.asarray(wavelength, dtype=float)
     angle = np.asarray(angle, dtype=float)
@@ -93,8 +76,6 @@ def transfer_matrix(
             period = period @ propagation[:, k] @ interfaces[:, k + 1]
         out = out @ np.linalg.matrix_power(period, periods)
     elif periods:
-        # One cell without its final interface to the exit medium. Each
-        # internal join is last-material -> first-material, not -> vacuum.
         body = np.broadcast_to(np.eye(2, dtype=complex), (n, 2, 2)).copy()
         for k in range(caps, layers):
             body = body @ propagation[:, k]
@@ -118,8 +99,6 @@ def transfer_matrix(
 
 @dataclass
 class ReleasedModel:
-    """Numerical release model; cached optical factors restrict wavelength grid."""
-
     x: np.ndarray
     indices: dict
     grid: np.ndarray
@@ -132,7 +111,7 @@ class ReleasedModel:
     etch: int
     polarization: str
     observed_amplitude: np.ndarray
-    periodic_convention: str = "legacy"  # Saved-fit replay only; refit with continuous physics.
+    periodic_convention: str = "legacy"
 
     @classmethod
     def load(cls, path: str | Path):
@@ -153,11 +132,6 @@ class ReleasedModel:
         )
 
     def amplitude(self, x=None, *, angle_shift=0.0):
-        """Two complex responses: absorber and exposed multilayer.
-
-        The signed etch offset in the release is not a physical negative layer:
-        it is converted to a change in the next remaining layer, as upstream.
-        """
         x = self.x if x is None else np.asarray(x, dtype=float)
         if x.shape != self.x.shape or not np.isfinite(x).all():
             raise ValueError("Invalid parameter vector")
@@ -202,7 +176,7 @@ class ReleasedModel:
             angle,
             polarization=self.polarization,
         )
-        # Remaining absorber/cap, preceded by carbon and a reference-plane spacer.
+
         remain = abs_indices[self.etch - 1 :]
         et = thick[remain].copy()
         et[0] = thick[etch_index]

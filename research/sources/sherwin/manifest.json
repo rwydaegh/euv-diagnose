@@ -140,20 +140,29 @@
   {
     "path": "Fresnel/calcFresnel_rough_periodic.m",
     "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Fresnel/calcFresnel_rough_periodic.m",
-    "sha256": "a39d2d1ad68903daaf0bf9c02134379bb2baa37cbf5881d5e7e8e499ad5da0a7",
-    "bytes": 3543
+    "sha256": "04968ac2190e657ce9a4365631e53016c60ab489aa1797442fbb1f1a97e35e96",
+    "bytes": 2931,
+    "upstream_sha256": "a39d2d1ad68903daaf0bf9c02134379bb2baa37cbf5881d5e7e8e499ad5da0a7",
+    "upstream_bytes": 3543,
+    "transformation": "Comments removed; executable code unchanged."
   },
   {
     "path": "Fresnel/calcMLAbsEtchFresnel.m",
     "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Fresnel/calcMLAbsEtchFresnel.m",
-    "sha256": "e1712d01dfcccf62a7fdca6c19754097046d34adc05483ed90f343d87a2b90d7",
-    "bytes": 3016
+    "sha256": "505d99ff46d20229d5269d0ccbcc147f375ec346c7b820f1eb0d6584abd503b0",
+    "bytes": 2247,
+    "upstream_sha256": "e1712d01dfcccf62a7fdca6c19754097046d34adc05483ed90f343d87a2b90d7",
+    "upstream_bytes": 3016,
+    "transformation": "Comments removed; executable code unchanged."
   },
   {
     "path": "Fresnel/calcMLAbsEtchFresnel_model.m",
     "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Fresnel/calcMLAbsEtchFresnel_model.m",
-    "sha256": "101b706f2a82dd143d8bdddd95ed50d6b9e29d47a2ac9dba444a0a6fc1b57450",
-    "bytes": 1075
+    "sha256": "aea875bb23c27e31d158168d5ae6d74d14cc97eacb922a86c88cdf9adebcc76d",
+    "bytes": 1061,
+    "upstream_sha256": "101b706f2a82dd143d8bdddd95ed50d6b9e29d47a2ac9dba444a0a6fc1b57450",
+    "upstream_bytes": 1075,
+    "transformation": "Comments removed; executable code unchanged."
   },
   {
     "path": "Fresnel/calcMLAbsEtchFresnel_wrapper.m",
@@ -164,26 +173,38 @@
   {
     "path": "Fresnel/getMLnk.m",
     "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Fresnel/getMLnk.m",
-    "sha256": "dcb9038542d8a9ec2408a6b79e7d0b2cd11ff438c45ef886a2b83b26aed5b9cd",
-    "bytes": 666
+    "sha256": "146be1cee71b94ff64bdc4be504858be01635b35a7a8238dd4421fc7555039d8",
+    "bytes": 528,
+    "upstream_sha256": "dcb9038542d8a9ec2408a6b79e7d0b2cd11ff438c45ef886a2b83b26aed5b9cd",
+    "upstream_bytes": 666,
+    "transformation": "Comments removed; executable code unchanged."
   },
   {
     "path": "Fresnel/mkMLAbsEtch.m",
     "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Fresnel/mkMLAbsEtch.m",
-    "sha256": "59902d6489fed25450c97cc74a5101c05e432766566f7b03fa7a0120297700e2",
-    "bytes": 3301
+    "sha256": "62436821b7203075abed22c3bbb66db679884effb814448f0d0ab78a4a550b00",
+    "bytes": 2912,
+    "upstream_sha256": "59902d6489fed25450c97cc74a5101c05e432766566f7b03fa7a0120297700e2",
+    "upstream_bytes": 3301,
+    "transformation": "Comments removed; executable code unchanged."
   },
   {
     "path": "Elemental nk/mkMLStack.m",
     "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Elemental%20nk/mkMLStack.m",
-    "bytes": 918,
-    "sha256": "8efb8d6ff46dc76aa70899f5468ee545d720a37096f7b1f9e924cdaaed86b624"
+    "bytes": 853,
+    "sha256": "e48b096cb0b3de56827d8cad72273798c98963e01f79b837bce418dea29ecfce",
+    "upstream_sha256": "8efb8d6ff46dc76aa70899f5468ee545d720a37096f7b1f9e924cdaaed86b624",
+    "upstream_bytes": 918,
+    "transformation": "Comments removed; executable code unchanged."
   },
   {
     "path": "Elemental nk/getScatFac.m",
     "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Elemental%20nk/getScatFac.m",
-    "bytes": 694,
-    "sha256": "ce57863e10aee9bc4d8fee0fd27e80e664fa4e3909f7aaf92330ddb19f6781ab"
+    "bytes": 657,
+    "sha256": "b788d7354ae791f4898f85b832277514b007c5384058adc217a96ca07f5c8a6c",
+    "upstream_sha256": "ce57863e10aee9bc4d8fee0fd27e80e664fa4e3909f7aaf92330ddb19f6781ab",
+    "upstream_bytes": 694,
+    "transformation": "Comments removed; executable code unchanged."
   },
   {
     "path": "Utilities/vec.m",
@@ -196,11 +217,5 @@
     "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Elemental%20nk/matMul2x2.m",
     "sha256": "a3d0c4097aecf4a11ccf1212d173d0558e7bea648c47d5b612e0158e882c5cd8",
     "bytes": 390
-  },
-  {
-    "path": "Apps/Reflectivityapp.mlapp",
-    "url": "https://raw.githubusercontent.com/s-sherwin/EUV/5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530/Apps/Reflectivityapp.mlapp",
-    "sha256": "83b73fba1ffbbf3e420c76540c821999ed7918f460b8e558fa632468ced267bc",
-    "bytes": 276047
   }
 ]

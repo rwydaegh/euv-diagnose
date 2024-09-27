@@ -1,4 +1,3 @@
-% Independent execution of the original upstream code for stored phase witnesses.
 addpath(genpath('research/sources/sherwin'));
 m=load('research/results/sherwin-input-131.mat');
 for field={'N_ML','n_cap','n_per','n_contam','n_etch'}

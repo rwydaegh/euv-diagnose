@@ -1,5 +1,3 @@
-"""The held-out observations must not affect the fitted objective or scales."""
-
 from dataclasses import dataclass
 
 import numpy as np
@@ -60,7 +58,6 @@ def test_invalid_bounds_and_empty_training_rejected():
 
 
 def test_recorded_fit_reproduces_continuous_predictions():
-    """The browser-facing saved run must agree with the shipped physical solver."""
     import json
     from pathlib import Path
 

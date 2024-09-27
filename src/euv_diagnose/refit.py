@@ -1,9 +1,3 @@
-"""Bounded experimental-stack refits with an explicit training-angle split.
-
-The objective balances channel RMS, not a calibrated experimental likelihood.
-Multistart dispersion is an optimization diagnostic, never a credible interval.
-"""
-
 from dataclasses import dataclass, replace
 from time import perf_counter
 
@@ -15,8 +9,6 @@ from .optics import ReleasedModel
 
 @dataclass
 class StackBounds:
-    """Bounds in the released 92-coordinate parameterization."""
-
     lower: np.ndarray
     upper: np.ndarray
     names: list[str]
@@ -40,7 +32,6 @@ class StackBounds:
 
 
 def subset_model(model, mask):
-    """Keep cached optical factors aligned when restricting the measured grid."""
     return replace(
         model,
         grid=model.grid[mask],
@@ -61,13 +52,6 @@ def fit_stack(
     max_nfev=250,
     initial=None,
 ):
-    """Fit free stack coordinates, optionally channel gains and a shared angle.
-
-    Calibration bounds (gain 0.95–1.05, angle ±0.1°) are sensitivity assumptions,
-    not instrument specifications. Channel scales use training observations only.
-    The first start is supplied/saved; others perturb it by 15% of bound widths.
-    Fixed coordinates use the released table's fixed values.
-    """
     observed = np.asarray(observed, dtype=float)
     train = np.asarray(train, dtype=bool)
     if (
