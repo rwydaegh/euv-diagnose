@@ -1,6 +1,16 @@
 # EUV-Diagnose
 
-EUV-Diagnose is a Python study of phase inference from reflectivity spectra. The code fits published measurements with a thin-film model and generates data for a neural estimator. A local web page shows the spectra, fit residuals, and test results.
+[![Checks](https://github.com/rwydaegh/euv-diagnose/actions/workflows/ci.yml/badge.svg)](https://github.com/rwydaegh/euv-diagnose/actions/workflows/ci.yml)
+[![Python](https://img.shields.io/badge/Python-3.12%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![NumPy](https://img.shields.io/badge/NumPy-2-4D6A80?logo=numpy&logoColor=white)](https://numpy.org/)
+[![SciPy](https://img.shields.io/badge/SciPy-fits-4D6A80?logo=scipy&logoColor=white)](https://scipy.org/)
+[![scikit-learn](https://img.shields.io/badge/scikit--learn-MLP-4D6A80?logo=scikitlearn&logoColor=white)](https://scikit-learn.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![MIT](https://img.shields.io/badge/license-MIT-59636e)](LICENSE)
+
+EUV-Diagnose fits measured reflectivity spectra and estimates the phase of reflected light. It includes a thin-film solver and a small neural estimator trained on simulated spectra.
+
+[Demo](https://rwydaegh.github.io/euv-diagnose/) · [Model card](docs/MODEL_CARD.md) · [Reproduce the results](docs/REPRODUCTION.md)
 
 The current code covers one TaN mask family. The target is the relative reflection phase of the absorber and exposed multilayer at 13.5 nm and 6° from normal. The measurements and original model come from [Stuart Sherwin's EUV repository](https://github.com/s-sherwin/EUV), accompanying [the EUV reflectometry study](https://doi.org/10.1117/1.JMM.20.3.031011).
 
@@ -15,7 +25,7 @@ make install
 make demo
 ```
 
-Open http://127.0.0.1:8000. The results and trained weights are included. After installing dependencies, the demo runs offline on CPU. The page exports data as CSV or JSON and figures as SVG. The Python commands require the checkout and its data files.
+Open http://127.0.0.1:8000. The results and trained weights are included, so there is no training step before opening the demo. After installing dependencies, it runs offline on CPU. The page exports data as CSV or JSON and figures as SVG. The Python commands require the checkout and its data files.
 
 If port 8000 is in use, run `uv run euv-diagnose demo --port 4319` after building the app.
 
@@ -42,18 +52,18 @@ Physical fitting was more accurate on the matched subset. Neural predictions wer
 
 ## Status
 
-The solver, measured fits, scalar neural estimator, and web page are implemented. A joint posterior over stack and calibration parameters remains planned. A method for choosing the next measurement also needs to be built and tested. Experimental phase accuracy and usefulness to an external user have not been established. The [research plan](BUILD_PLAN.md) contains the remaining work.
+The solver, measured fits, scalar neural estimator, and web page are implemented. A joint posterior over stack and calibration parameters remains planned. A method for choosing the next measurement also needs to be built and tested. Experimental phase accuracy and usefulness to an external user have not been established.
 
 The current model requires a fixed measurement grid and covers one mask family. Industrial fault diagnosis and wafer imaging have not been tested.
 
 ## Reproduce and develop
 
-The [reproduction guide](docs/REPRODUCTION.md) gives the commands for each study. The repository includes source checksums, numerical references, and model weights in NumPy format. See [CONTRIBUTING.md](CONTRIBUTING.md) for the development workflow and the [browser report](qa/browser-report.md) for the tested interactions.
+The [reproduction guide](docs/REPRODUCTION.md) gives the commands for each study. The repository includes source checksums, numerical references, and model weights in NumPy format.
 
 ```sh
-make check           # lint, tests, and package/web builds
-make browser-install # once per machine
-make e2e             # Chromium desktop and mobile viewport tests
+make check
+make browser-install
+make e2e
 ```
 
 GitHub Actions runs these checks. The web page uses TypeScript and SVG. Simulation and fitting use Python.
