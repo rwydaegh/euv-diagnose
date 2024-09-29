@@ -10,7 +10,7 @@
 
 EUV-Diagnose fits measured reflectivity spectra and estimates the phase of reflected light. It includes a thin-film solver and a small neural estimator trained on simulated spectra.
 
-[Demo](https://rwydaegh.github.io/euv-diagnose/) · [Model card](docs/MODEL_CARD.md) · [Reproduce the results](docs/REPRODUCTION.md)
+[Demo](https://robinwydaeghe.com/euv-diagnose/) · [Model card](docs/MODEL_CARD.md) · [Reproduce the results](docs/REPRODUCTION.md)
 
 The current code covers one TaN mask family. The target is the relative reflection phase of the absorber and exposed multilayer at 13.5 nm and 6° from normal. The measurements and original model come from [Stuart Sherwin's EUV repository](https://github.com/s-sherwin/EUV), accompanying [the EUV reflectometry study](https://doi.org/10.1117/1.JMM.20.3.031011).
 
@@ -33,11 +33,11 @@ If port 8000 is in use, run `uv run euv-diagnose demo --port 4319` after buildin
 
 The solver uses transfer-matrix optics. Tests compare its complex amplitudes with the original code and check analytic cases. One check found an inconsistent boundary in the original repeated-layer calculation. The corrected calculation agrees with an explicit expansion of all 40 periods. The original convention remains available for reproducing the saved upstream fits.
 
-A numerical search found two synthetic stacks whose relative phases differ by 1.00° but whose intensity spectra are nearly identical across seven angles. The page compares their spectra at additional angles. The pair depends on the stated parameter bounds and noise assumptions. The pair does not define a phase uncertainty interval or establish which measurement is optimal.
+A numerical search found two synthetic stacks whose relative phases differ by 1.00° but whose intensity spectra are nearly identical across seven angles. The page compares their spectra at additional angles. This example depends on the stated parameter bounds and noise assumptions. It does not define a phase uncertainty interval or establish which measurement is optimal.
 
 The measured-data study fits 22 stack parameters to published absorber and multilayer spectra. A second fit also varies intensity gains and an angle offset. Its predicted phase is 153.58°, compared with 147.21° for the stack-only fit. Its holdout error is slightly higher. The holdout is exploratory: the saved initialization was fitted to all angles. No independent phase measurement is available to check either prediction. The [fit notes](docs/REFIT.md) describe the objective and calibration bounds.
 
-The learning study trains five small multilayer perceptrons on 8,000 simulated spectra. Their mean prediction estimates phase. A separate calibration set determines the interval width. The tests compare the estimator with ridge regression and physical least squares, then change the material ranges and add correlated measurement error.
+The learning study trains five small multilayer perceptrons on 8,000 simulated spectra. We average their phase estimates. A separate calibration set determines the interval width. The tests compare the estimator with ridge regression and physical least squares, then change the material ranges and add correlated measurement error.
 
 | Synthetic test | Result |
 |---|---:|
