@@ -1,5 +1,3 @@
-"""Reconcile saved fit observations, embedded cells, and original MAT files."""
-
 import hashlib
 import json
 from pathlib import Path

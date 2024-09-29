@@ -1,10 +1,3 @@
-"""Construct a bounded, exact-model phase ambiguity witness on synthetic data.
-
-The nominal model comes from a real release; observations here are noiseless
-simulations. Noise scales are illustrative assumptions, not experimental estimates.
-This finds a candidate pair, not a posterior, confidence interval, or global limit.
-"""
-
 import argparse
 import hashlib
 import json
@@ -18,7 +11,9 @@ from scipy.optimize import least_squares
 
 from euv_diagnose.optics import ReleasedModel
 
-parser = argparse.ArgumentParser(description=__doc__)
+parser = argparse.ArgumentParser(
+    description="Construct a bounded, exact-model phase ambiguity witness on synthetic data.\n\nThe nominal model comes from a real release; observations here are noiseless\nsimulations. Noise scales are illustrative assumptions, not experimental estimates.\nThis finds a candidate pair, not a posterior, confidence interval, or global limit.\n"
+)
 parser.add_argument(
     "--material-fraction",
     type=float,
@@ -64,8 +59,6 @@ def evaluate(z):
     return residual, phase, x, r
 
 
-# Local calculation is an exploratory diagnostic only; constraints can invalidate
-# extrapolation of its unbounded covariance, hence the exact nonlinear check below.
 h = 1e-5
 J = []
 g = []
@@ -92,7 +85,7 @@ for name, cols in [
         "scaled_jacobian_condition": float(s[0] / s[-1]),
         "linearized_unbounded_phase_sd_deg": float(np.rad2deg(np.linalg.norm((v @ g[cols]) / s))),
     }
-# A modest requested phase separation, not an optimized headline number.
+
 target_deg = args.target_deg
 target = np.deg2rad(target_deg)
 phase_weight = 1e4

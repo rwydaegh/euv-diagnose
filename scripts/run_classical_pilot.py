@@ -1,5 +1,3 @@
-"""Conditional-stack pilot; exploratory angle holdout, not a final benchmark."""
-
 import hashlib
 import json
 import subprocess
@@ -22,12 +20,12 @@ SRC = ROOT / "research/sources/sherwin"
 OUT = ROOT / "research/results"
 model = ReleasedModel.load(SRC / "FIlm models/Reflectivityapp_workspace_fit131.mat")
 path = SRC / "Reflectivityapp/TaN_131/Data/Reflectivityapp_workspace_2019_11_22_AbsML.mat"
-# Last multilayer acquisition, zero-based 21. No pairing with absorber scans assumed.
+
 observed = read_observations(path, model.grid, scan=21)
 train = model.grid[:, 1] <= 5
 test = ~train
 truth = np.array([0.8, 1.04, 0.08, 0.0004])
-synthetic = predict(model, truth)  # noiseless implementation/recovery check only
+synthetic = predict(model, truth)
 report = {
     "scope": "Exploratory repeat scan 22, multilayer only, initial stack fixed to saved fit. Not causal identification, calibrated uncertainty, or a blind final evaluation.",
     "source_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
@@ -84,8 +82,8 @@ axes[1].axhline(0, color="gray", lw=0.7)
 axes[0].legend()
 axes[1].legend()
 fig.savefig(OUT / "classical-pilot.png", dpi=170)
-# Exploratory sensitivity AFTER inspecting the primary run, not a new blind test.
-# Preserve the primary result; do not relabel or silently discard the 2-degree data.
+
+
 report["sensitivity_excluding_2deg"] = {
     "reason": "Strong anomalous spectral shape at labeled 2 degrees; cause unresolved. Post-hoc sensitivity, not corrected data.",
     "fits": [],

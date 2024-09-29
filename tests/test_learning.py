@@ -1,5 +1,3 @@
-"""Check portable inference and calibration mechanics independently of training."""
-
 import numpy as np
 import pytest
 from sklearn.neural_network import MLPRegressor
@@ -49,7 +47,6 @@ def test_portable_network_matches_sklearn(tmp_path):
 
 
 def test_conformal_quantile_uses_finite_sample_rank():
-    # ceil((9+1)*.9)=9; a naive empirical percentile would be too small.
     assert conformal_radius(np.arange(1.0, 10.0), 0.9) == 9
     assert conformal_radius(np.arange(1.0, 10.0), 0.5) == 5
     assert np.isinf(conformal_radius(np.arange(1.0, 10.0), 0.99))

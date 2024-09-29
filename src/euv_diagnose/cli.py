@@ -1,5 +1,3 @@
-"""Small local command line for reproducible result export and the browser demo."""
-
 from __future__ import annotations
 
 import argparse

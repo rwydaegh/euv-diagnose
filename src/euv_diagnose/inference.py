@@ -1,9 +1,3 @@
-"""Small classical baseline, conditional on the released initial stack.
-
-No parameter uncertainties or causal diagnosis follow from this least-squares fit.
-Bounds and equal-intensity residual weighting are explicit pilot assumptions.
-"""
-
 import time
 from dataclasses import dataclass
 

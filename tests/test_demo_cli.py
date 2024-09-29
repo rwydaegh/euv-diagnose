@@ -1,5 +1,3 @@
-"""Release-level tests of export conventions and useful CLI failures."""
-
 import json
 from dataclasses import replace
 from pathlib import Path

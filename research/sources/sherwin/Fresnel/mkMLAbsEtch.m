@@ -3,7 +3,6 @@ function out = mkMLAbsEtch(n_cap,n_per,n_etch,thick,amu,rho_nom,rough,f0f1_eleme
     N = size(thick,2);
     f = @(x) reshape(x,[],N);
     
-    %% Find which layers are shared between etched and unetched ("mirror")
     if n_etch > 0
         inds_etch = 1:n_etch + 1;
     else
@@ -13,7 +12,6 @@ function out = mkMLAbsEtch(n_cap,n_per,n_etch,thick,amu,rho_nom,rough,f0f1_eleme
     inds_contam = inds_detch(end)+1:size(thick,1);
     inds_shared = setdiff(1:size(thick,1),[inds_etch,inds_detch,inds_contam]);
     
-    %% Mirror
     thick_mirror = f( thick(inds_shared,:) );
     composition_mirror = reshape( composition(:,inds_shared,:),size(composition,1),[],N );
     rough_mirror = f( rough(inds_shared,:) );
@@ -25,7 +23,6 @@ function out = mkMLAbsEtch(n_cap,n_per,n_etch,thick,amu,rho_nom,rough,f0f1_eleme
     out.mirror.nk = layer_nk_ML;
     out.mirror.rough = layer_rough_ML;
     out.mirror.rough(end,:) = 0;
-    %% Absorber (un-etched)
     thick_abs = f( thick(inds_etch,:) );
     composition_abs = reshape( composition(:,inds_etch,:),size(composition,1),[],N );
     rough_abs = f( rough(inds_etch,:) );
@@ -37,21 +34,16 @@ function out = mkMLAbsEtch(n_cap,n_per,n_etch,thick,amu,rho_nom,rough,f0f1_eleme
     out.absorber.nk = layer_nk_abs;
     out.absorber.rough = layer_rough_abs;
     out.absorber.rough(end,:) = 0;
-    %% Etched absorber (+ contamination) 
-    %% Top to bottom: Vacuum, contamination, remaining absorber, remaining cap
     detch = thick(inds_detch,:);
-    % Bottom: Remaining layers from absorber
     thick_etch = thick_abs(n_etch:end,:);
     thick_etch(1,:) = detch;
     rough_etch = rough_abs(n_etch:end,:);
     rough_etch(1,:) = rough(inds_detch);
     composition_etch = composition_abs(:,end-size(thick_etch,1)+1:end,:);
-    % On top of that: Carbon contamination
     thick_contam = thick(inds_contam,:);
     thick_etch = [thick_contam;thick_etch];
     composition_etch = [composition(:,inds_contam,:),composition_etch];
     rough_etch = [rough(inds_contam,:); rough_etch];
-    % On top of that: Vacuum to match absorber reference plane
     delta_t = sum(thick_abs,1) - sum(thick_etch,1);
     thick_etch = [delta_t;thick_etch];
     rough_etch = [zeros(1,N); rough_etch];

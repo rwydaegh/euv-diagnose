@@ -1,4 +1,3 @@
-% Optional regeneration of perturbed reference cases; requires GNU Octave.
 addpath(genpath('research/sources/sherwin'));
 for tagcell={'131','073','074'}
     tag=tagcell{1}; m=load(['research/results/sherwin-input-' tag '.mat']);

@@ -1,5 +1,3 @@
-"""Regenerate candidate checks with the original solver (requires GNU Octave)."""
-
 import subprocess
 from pathlib import Path
 

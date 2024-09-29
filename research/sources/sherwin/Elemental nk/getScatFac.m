@@ -19,5 +19,4 @@ function [f0f1,rho_nom,amu] = getScatFac(materials,lambda)
         
         f0f1(:,i) = interp1(lam,ff(:,1) + 1i*ff(:,2),lambda,'linear');
     end
-%     f0f1 = dat.table.asf{inds(1)};
 end

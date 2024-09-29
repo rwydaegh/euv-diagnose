@@ -1,5 +1,3 @@
-"""Compare release-compatible and continuous periodic boundaries; no refitting."""
-
 import json
 from dataclasses import replace
 from pathlib import Path

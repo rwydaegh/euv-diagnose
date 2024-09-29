@@ -1,5 +1,3 @@
-"""Check continuous-boundary witnesses by explicitly expanding all 40 periods."""
-
 import json
 from dataclasses import replace
 from pathlib import Path

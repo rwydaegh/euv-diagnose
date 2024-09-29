@@ -10,9 +10,9 @@ function [layer_thick,layer_nk,layer_rough] = mkMLStack(N_ML,n_cap,thick,amu,rho
     layer_thick = [thick(ii_cap,:); repmat(thick(ii_per,:),N_ML,1)];
     layer_rough = [rough(ii_cap,:); repmat(rough(ii_per,:),N_ML,1); rough(end,:)];
     
-    re = 2.8179e-15; % classical electron radius [m]
-    Na = 6.0221409e23; % Avogodro's number
-    na = rho_nom./amu * Na; % atoms/cm^3
+    re = 2.8179e-15;
+    Na = 6.0221409e23;
+    na = rho_nom./amu * Na;
     const = 1e-12 * lambda.^2 .* re / (2*pi);
     
     composition = reshape(composition,[],size(thick,1),size(thick,2));

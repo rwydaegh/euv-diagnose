@@ -1,5 +1,3 @@
-"""Build the browser's small, deterministic result bundle from scientific artifacts."""
-
 from __future__ import annotations
 
 import hashlib
@@ -14,7 +12,7 @@ from .optics import ReleasedModel
 
 
 def revision(root: Path) -> str:
-    """Return an informative revision without requiring Git in a release archive."""
+
     try:
         return subprocess.check_output(
             ["git", "rev-parse", "--short", "HEAD"], cwd=root, text=True, stderr=subprocess.DEVNULL
@@ -24,7 +22,7 @@ def revision(root: Path) -> str:
 
 
 def rectangular_spectra(grid: np.ndarray, values: np.ndarray) -> tuple[list, list, list]:
-    """Convert unordered wavelength/angle observations to the browser's dense grid."""
+
     grid = np.asarray(grid, dtype=float)
     values = np.asarray(values, dtype=float)
     if grid.ndim != 2 or grid.shape[1] != 2 or values.shape != (len(grid), 2):
@@ -49,7 +47,7 @@ def rectangular_spectra(grid: np.ndarray, values: np.ndarray) -> tuple[list, lis
 
 
 def synthetic_bundle(root: Path) -> dict:
-    """Recompute continuous-boundary spectra from the saved synthetic witness."""
+
     result_path = root / "research/results/phase-continuous-tight.npz"
     report_path = root / "research/results/phase-continuous-tight.json"
     report = json.loads(report_path.read_text())
@@ -89,8 +87,8 @@ def synthetic_bundle(root: Path) -> dict:
         "baselineDistance": report["total_whitened_spectral_distance"],
         "distances": distances,
         "metadata": {
-            "title": "Two spectra. Two possible phases.",
-            "description": "Synthetic models constructed from the released TaN mask family.",
+            "title": "Synthetic stack comparison",
+            "description": "Two simulated stacks from the released TaN mask model.",
             "sourceUrl": "https://github.com/s-sherwin/EUV",
             "artifactSha256": hashlib.sha256(result_path.read_bytes()).hexdigest(),
             "assumptions": [
@@ -105,7 +103,7 @@ def synthetic_bundle(root: Path) -> dict:
 
 
 def measured_bundle(root: Path) -> dict:
-    """Expose both fitted assumptions with unchanged signed measured intensities."""
+
     path = root / "research/results/refit-measured.json"
     report = json.loads(path.read_text())
     grid = np.column_stack([report["wavelength_nm"], report["angle_deg"]])
@@ -145,14 +143,14 @@ def measured_bundle(root: Path) -> dict:
         "metadata": {
             "sourceUrl": "https://github.com/s-sherwin/EUV",
             "artifactSha256": hashlib.sha256(path.read_bytes()).hexdigest(),
-            "description": "Initial measured absorber and multilayer spectra, refitted with the corrected periodic boundaries. Compare phase predictions under two calibration assumptions.",
+            "description": "We fitted the measured absorber and multilayer spectra with the corrected layer boundaries. The two fits use different calibration assumptions.",
             "limitations": report["assumptions"],
         },
     }
 
 
 def learning_bundle(root: Path) -> dict:
-    """Export executed evaluation metrics and predictions, never training claims alone."""
+
     path = root / "research/results/learning-benchmark.json"
     report = json.loads(path.read_text())
     nominal = report["metrics"]["nominal"]
@@ -173,8 +171,8 @@ def learning_bundle(root: Path) -> dict:
             for split in ["nominal", "shifted"]
         ]
     return {
-        "title": "A trained model, with its limits measured",
-        "description": "Five neural networks estimate phase from synthetic spectra on a fixed grid. Independent calibration sets interval widths; a changed-material and correlated-error challenge tests their limits.",
+        "title": "Neural phase estimates",
+        "description": "We trained five multilayer perceptrons on simulated spectra and averaged their phase estimates. A separate calibration set determines the interval width. The shifted test changes the material ranges and adds correlated measurement error.",
         "metrics": [
             {
                 "label": "Neural phase RMSE",
@@ -194,7 +192,7 @@ def learning_bundle(root: Path) -> dict:
             {
                 "label": "Shifted coverage",
                 "value": f"{100 * shifted_interval['coverage']:.1f}%",
-                "detail": "The nominal interval guarantee does not survive this shift",
+                "detail": "Same interval width; changed material ranges and correlated errors",
             },
             {
                 "label": "Prediction latency",
@@ -223,7 +221,7 @@ def learning_bundle(root: Path) -> dict:
             "Intervals describe nominal marginal coverage under the calibration distribution, not a posterior over layer structures.",
             "Shifted material assumptions and correlated errors reduce coverage; the model has no validated out-of-distribution detector.",
             "The fixed input grid contains 63 wavelength/angle pairs and both channels. Missing measurements are not supported.",
-            "Classical physical fits are evaluated separately on a smaller subset; a ridge comparison alone does not establish superiority over physical inference.",
+            "Physical fits had lower phase RMSE on the shared 32-case subset. Their timing includes three starts per case.",
         ],
         "sourceUrl": "https://github.com/s-sherwin/EUV",
         "artifactSha256": hashlib.sha256(path.read_bytes()).hexdigest(),
@@ -231,7 +229,7 @@ def learning_bundle(root: Path) -> dict:
 
 
 def build_bundle(root: Path, output: Path) -> dict:
-    """Write a self-contained browser bundle from available completed studies."""
+
     bundle = {"schemaVersion": 1, "revision": revision(root), "synthetic": synthetic_bundle(root)}
     if (root / "research/results/refit-measured.json").is_file():
         bundle["measured"] = measured_bundle(root)
