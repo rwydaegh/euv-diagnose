@@ -121,7 +121,7 @@ def plot_benchmark(evaluation_path, report_path, output_path):
             )
             ax.set_title(ax.get_title(), fontsize=10)
             ax.grid(alpha=0.15)
-        fig.savefig(output_path)
+        fig.savefig(output_path, metadata={"Date": None})
         plt.close(fig)
 
 

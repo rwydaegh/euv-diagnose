@@ -14,7 +14,7 @@ The target is `arg(r_absorber / r_multilayer)` at a shared reference plane, expr
 
 ## Simulation assumptions
 
-The source is the MIT-licensed [Sherwin EUV repository](https://github.com/s-sherwin/EUV), model `Reflectivityapp_workspace_fit131.mat`. The saved model defines this synthetic family's center; it is not an independent experimental test. All simulations use the verified continuous-boundary solver instead of the upstream legacy periodic shortcut.
+The source is the MIT-licensed [Sherwin EUV repository](https://github.com/s-sherwin/EUV), model `Reflectivityapp_workspace_fit131.mat`. The saved model defines this synthetic family's center; it is not an independent experimental test. All simulations use the verified continuous-boundary solver instead of the upstream legacy periodic shortcut. The correlated-roughness correction follows Mirkarimi, Bajt and Wall, “Mo/Si and Mo/Be multilayer thin films on Zerodur substrates for extreme-ultraviolet lithography.”
 
 Twenty-two physical parameters vary independently and uniformly:
 

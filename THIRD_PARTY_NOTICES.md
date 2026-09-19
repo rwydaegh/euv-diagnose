@@ -1,6 +1,6 @@
-# Third-party attribution
+# Third-party notices
 
-The NumPy optics implementation adapts Stuart Sherwin’s EUV code at commit `5cce3c9bf9c9631afa0a40e74ca5638fbbd5d530`. Original source: https://github.com/s-sherwin/EUV. The retained source and numerical data are listed in `research/sources/sherwin/manifest.json`. Comments were removed from the retained MATLAB source; executable statements and numerical data are unchanged. The manifest records both upstream and modified source checksums. The correlated-roughness correction cites Paul B. Mirkarimi, Sasa Bajt, and Mark A. Wall, “Mo/Si and Mo/Be multilayer thin films on Zerodur substrates for extreme-ultraviolet lithography.” The upstream license follows.
+## [EUV — Stuart Sherwin](https://github.com/s-sherwin/EUV)
 
 MIT License
 

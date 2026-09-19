@@ -52,10 +52,13 @@ To regenerate the perturbed s/p reference fixtures used in tests:
 
 ```sh
 octave --no-gui --quiet scripts/generate_optics_reference.m
+uv run python scripts/normalize_mat_headers.py
 uv run pytest -q
 ```
 
 The reference generators use the committed numerical-only `sherwin-input-*.mat` exports.
+
+After regenerating MAT files, `normalize_mat_headers.py` removes creation timestamps from their descriptive headers under `research/results`. It preserves the writer information and numerical payload. Upstream source files are untouched. Benchmark SVG exports omit the automatic creation date.
 
 Source attribution and licensing are recorded in [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md) and the upstream manifests. The native implementation preserves the released phase, empirical roughness correction, etch convention, and tabulated optical factors. `ReleasedModel.load` defaults to the `legacy` periodic convention for saved-fit reproduction; use `dataclasses.replace(model, periodic_convention="continuous")` for new physical inference. The generic transfer-matrix kernel defaults to continuous boundaries. The corrected periodic calculation matches explicit layer expansion and analytic cases; the original shortcut does not. The classical repeat pilot uses the legacy calculation only to reproduce the original results. It does not test corrected-model uncertainty. Agreement with upstream code checks the port, not the physical assumptions. The Python interface is specific to this dataset.
 

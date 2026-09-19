@@ -12,7 +12,6 @@ from .optics import ReleasedModel
 
 
 def revision(root: Path) -> str:
-
     try:
         return subprocess.check_output(
             ["git", "rev-parse", "--short", "HEAD"], cwd=root, text=True, stderr=subprocess.DEVNULL
@@ -22,7 +21,6 @@ def revision(root: Path) -> str:
 
 
 def rectangular_spectra(grid: np.ndarray, values: np.ndarray) -> tuple[list, list, list]:
-
     grid = np.asarray(grid, dtype=float)
     values = np.asarray(values, dtype=float)
     if grid.ndim != 2 or grid.shape[1] != 2 or values.shape != (len(grid), 2):
@@ -47,7 +45,6 @@ def rectangular_spectra(grid: np.ndarray, values: np.ndarray) -> tuple[list, lis
 
 
 def synthetic_bundle(root: Path) -> dict:
-
     result_path = root / "research/results/phase-continuous-tight.npz"
     report_path = root / "research/results/phase-continuous-tight.json"
     report = json.loads(report_path.read_text())
@@ -103,7 +100,6 @@ def synthetic_bundle(root: Path) -> dict:
 
 
 def measured_bundle(root: Path) -> dict:
-
     path = root / "research/results/refit-measured.json"
     report = json.loads(path.read_text())
     grid = np.column_stack([report["wavelength_nm"], report["angle_deg"]])
@@ -150,7 +146,6 @@ def measured_bundle(root: Path) -> dict:
 
 
 def learning_bundle(root: Path) -> dict:
-
     path = root / "research/results/learning-benchmark.json"
     report = json.loads(path.read_text())
     nominal = report["metrics"]["nominal"]
@@ -229,7 +224,6 @@ def learning_bundle(root: Path) -> dict:
 
 
 def build_bundle(root: Path, output: Path) -> dict:
-
     bundle = {"schemaVersion": 1, "revision": revision(root), "synthetic": synthetic_bundle(root)}
     if (root / "research/results/refit-measured.json").is_file():
         bundle["measured"] = measured_bundle(root)

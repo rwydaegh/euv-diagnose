@@ -38,8 +38,8 @@ def transfer_matrix(
         raise ValueError("Outside physical input domain")
     caps = layers if caps is None else caps
     if (
-        not isinstance(periods, (int, np.integer))
-        or not isinstance(caps, (int, np.integer))
+        not isinstance(periods, int | np.integer)
+        or not isinstance(caps, int | np.integer)
         or periods < 0
         or not 0 <= caps <= layers
     ):

@@ -3,7 +3,7 @@ message: "Please cite this software and the upstream experimental work when usin
 title: "EUV-Diagnose: reflectometry, phase ambiguity, and learned inference"
 type: software
 version: 0.1.0
-date-released: 2026-09-18
+date-released: 2024-09-29
 license: MIT
 authors:
   - name: "EUV-Diagnose contributors"
